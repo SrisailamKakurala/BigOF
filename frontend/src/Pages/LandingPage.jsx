@@ -3,9 +3,13 @@ import Navbar from '../Components/Navbar'
 import Logo from '../assets/images/logo.png'
 import Testimonials from '../Components/Testimonials'
 import Footer from '../Components/Footer'
+import DemoSection from '../Components/DemoSection'
+import ContactUs from '../Components/ContactUs'
+import { Link, Navigate } from 'react-router-dom'
 
 
 const LandingPage = () => {
+
   return (
     <div>
       <Navbar />
@@ -19,7 +23,7 @@ const LandingPage = () => {
             </h1>
             <p className="mb-8 leading-relaxed">Copper mug try-hard pitchfork pour-over freegan heirloom neutra air plant cold-pressed tacos poke beard tote bag. Heirloom echo park mlkshk tote bag selvage hot chicken authentic tumeric truffaut hexagon try-hard chambray.</p>
             <div className="flex justify-center gap-8">
-              <button className='px-6 shadow-xl py-2 bg-green-600 hover:bg-green-500 duration-200 rounded-md text-white text-lg font-semibold'>Register Today <i className="ml-2 fa-solid fa-arrow-right-long fa-lg"></i> </button>
+              <Link to={'/register'} className='px-6 shadow-xl py-2 bg-green-600 hover:bg-green-500 duration-200 rounded-md text-white text-lg font-semibold'>Register Today <i className="ml-2 fa-solid fa-arrow-right-long fa-lg"></i> </Link>
             </div>
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
@@ -194,12 +198,12 @@ const LandingPage = () => {
       <div className="h-2 w-full bg-slate-200"></div>
 
       {/* Select Demo language */}
-      Demo 
+      <DemoSection />
       
       <div className="h-2 w-full bg-slate-200"></div>
 
       {/* contact us */}
-      contact us
+      <ContactUs />
 
       <div className="h-2 w-full bg-slate-200"></div>
       
