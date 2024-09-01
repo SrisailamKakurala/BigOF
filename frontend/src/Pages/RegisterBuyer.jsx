@@ -60,7 +60,7 @@ const RegisterBuyer = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="min-h-screen flex items-center justify-center bg-green-500 py-5">
             <form className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg" onSubmit={handleSubmit}>
                 <div className="mb-4 text-center">
                     <input

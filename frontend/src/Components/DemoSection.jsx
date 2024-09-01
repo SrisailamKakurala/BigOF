@@ -2,10 +2,10 @@ import React from "react";
 
 function DemoSection() {
   return (
-    <div className="flex flex-col items-center bg-gray-200 p-4 sm:p-8 rounded-md">
+    <div id="demo" className="flex flex-col items-center bg-gray-200 p-4 sm:p-8 rounded-md">
       <h2 className="text-black text-3xl sm:text-2xl mb-4 font-semibold">DEMO</h2>
       
-      <div className="w-full sm:w-auto mb-8 flex-col md:flex md:gap-5 items-end mt-12">
+      <div className="w-full sm:w-auto mb-8  md:flex md:gap-5 flex-col items-center mt-12">
         
         <div className="relative mt-2 w-full sm:w-auto mb-2">
           <select
@@ -20,7 +20,7 @@ function DemoSection() {
           </select>
         </div>
         <button className="bg-blue-700 text-white py-2 px-4 rounded-md w-full sm:w-auto">
-          select demo language
+          Get Demo
         </button>
       </div>
       
@@ -29,7 +29,6 @@ function DemoSection() {
           className="w-full h-full rounded-md shadow-md"
           src="https://www.youtube.com/embed/dQw4w9WgXcQ"
           title="Demo Video"
-          frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         ></iframe>

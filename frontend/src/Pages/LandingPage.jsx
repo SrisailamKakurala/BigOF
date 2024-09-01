@@ -35,7 +35,7 @@ const LandingPage = () => {
       <div className="h-2 w-full bg-slate-200"></div>
 
       {/* featurs */}
-      <section className="text-gray-600 body-font -mt-5">
+      <section id='features' className="text-gray-600 body-font -mt-5">
         <div className="container px-5 py-24 mx-auto">
           <div className="flex flex-col text-center w-full mb-20">
             <h2 className="text-xs text-green-500 tracking-widest font-medium title-font mb-1">BIGOF</h2>
