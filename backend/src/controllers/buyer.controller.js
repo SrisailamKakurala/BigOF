@@ -4,6 +4,24 @@ const {ApiResponse} = require('../utils/ApiResponse')
 const uploadOnCloudinary = require('../utils/cloudinary')
 const buyerModel = require('../models/buyer.model')
 
+
+const generateAccessAndRefreshToken = async (userId) => {
+    try{
+        const buyer = await buyerModel.findById(userId)
+        const accessToken = buyer.generateAccessToken()
+        const refreshToken = buyer.generateRefreshToken()
+
+        buyer.refreshToken = refreshToken
+        await buyer.save({validateBeforeSave: false})
+
+        return {accessToken, refreshToken}
+
+    }catch(err){
+        throw new ApiError(500, 'something went wrong while generating access and refresh token')
+    }
+}
+
+
 const registerBuyer = asyncHandler( async (req, res) => {
     // get user dets from frontend
     // validation - not empty
@@ -66,4 +84,75 @@ const registerBuyer = asyncHandler( async (req, res) => {
 } )
 
 
-module.exports = {registerBuyer}
+const loginBuyer = asyncHandler( async (req, res) => {
+
+    const { fullName, password, mobileNumber } = req.body
+
+    if(!(fullName || password || mobileNumber)) {
+        throw new ApiError(400, 'All fields are required')
+    }
+
+    const buyer = await buyerModel.findOne({ $or: [{fullName}, {mobileNumber}]})
+
+    if(!buyer) {
+        throw new ApiError(404, 'user not found')
+    }
+
+    const passwordCorrect = await buyer.isPasswordCorrect(password)
+
+    if(!passwordCorrect) {
+        throw new ApiError(400, 'incorrect password')
+    }
+
+    const {accessToken, refreshToken} = await generateAccessAndRefreshToken(buyer._id)
+
+    const options = {
+        httpOnly: true,
+        secure: true,
+    }
+
+    return res
+    .status(200)
+    .cookie('accessToken', accessToken, options)
+    .cookie('refreshToken', refreshToken, options)
+    .json(
+        new ApiResponse(
+            200,
+            {
+                user: buyer, accessToken, refreshToken
+            },
+            'user logged in successfully'
+        )
+    )
+
+
+} )
+
+
+const logoutBuyer = asyncHandler( async (req, res) => {
+    await buyerModel.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set: {
+                refreshToken: undefined,
+            }
+        },
+        {
+            new: true,
+        }
+    )
+
+    const options = {
+        httpOnly: true,
+        secure: true,
+    }
+
+    return res
+    .status(200)
+    .clearCookie('accessToken', options)
+    .clearCookie('refreshToken', options)
+    .json(new ApiResponse(200, {}, 'User logged out'))
+} )
+
+
+module.exports = {registerBuyer, loginBuyer, logoutBuyer}

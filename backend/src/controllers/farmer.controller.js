@@ -4,6 +4,24 @@ const {ApiResponse} = require('../utils/ApiResponse')
 const uploadOnCloudinary = require('../utils/cloudinary')
 const farmerModel = require('../models/farmer.model')
 
+
+const generateAccessAndRefreshToken = async (userId) => {
+    try{
+        const farmer = await farmerModel.findById(userId)
+        const accessToken = farmer.generateAccessToken()
+        const refreshToken = farmer.generateRefreshToken()
+
+        farmer.refreshToken = refreshToken
+        await farmer.save({validateBeforeSave: false})
+
+        return {accessToken, refreshToken}
+
+    }catch(err){
+        throw new ApiError(500, 'something went wrong while generating access and refresh token')
+    }
+}
+
+
 const registerFarmer = asyncHandler( async (req, res) => {
     // get user dets from frontend
     // validation - not empty
@@ -66,4 +84,75 @@ const registerFarmer = asyncHandler( async (req, res) => {
 } )
 
 
-module.exports = {registerFarmer}
+const loginFarmer = asyncHandler( async (req, res) => {
+
+    const { fullName, password, mobileNumber } = req.body
+
+    if(!(fullName || password || mobileNumber)) {
+        throw new ApiError(400, 'All fields are required')
+    }
+
+    const farmer = await farmerModel.findOne({ $or: [{fullName}, {mobileNumber}]})
+
+    if(!farmer) {
+        throw new ApiError(404, 'user not found')
+    }
+
+    const passwordCorrect = await farmer.isPasswordCorrect(password)
+
+    if(!passwordCorrect) {
+        throw new ApiError(400, 'incorrect password')
+    }
+
+    const {accessToken, refreshToken} = await generateAccessAndRefreshToken(farmer._id)
+
+    const options = {
+        httpOnly: true,
+        secure: true,
+    }
+
+    return res
+    .status(200)
+    .cookie('accessToken', accessToken, options)
+    .cookie('refreshToken', refreshToken, options)
+    .json(
+        new ApiResponse(
+            200,
+            {
+                user: farmer, accessToken, refreshToken
+            },
+            'user logged in successfully'
+        )
+    )
+
+
+} )
+
+
+const logoutFarmer = asyncHandler( async (req, res) => {
+    await farmerModel.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set: {
+                refreshToken: undefined,
+            }
+        },
+        {
+            new: true,
+        }
+    )
+
+    const options = {
+        httpOnly: true,
+        secure: true,
+    }
+
+    return res
+    .status(200)
+    .clearCookie('accessToken', options)
+    .clearCookie('refreshToken', options)
+    .json(new ApiResponse(200, {}, 'User logged out'))
+} )
+
+
+module.exports = {registerFarmer, loginFarmer, logoutFarmer}

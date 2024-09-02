@@ -7,7 +7,8 @@ const buyerSchema = new mongoose.Schema({
     fullName: {
         type: String,
         required: true,
-        index: true
+        index: true,
+        lowercase: true
     },
     mobileNumber: {
         type: String,
@@ -31,6 +32,9 @@ const buyerSchema = new mongoose.Schema({
     profilePicture: {
         type: String,
         default: ''
+    },
+    refreshToken: {
+        type: String,
     },
     unreadMessagesCount: {
         type: Number,
@@ -70,16 +74,15 @@ buyerSchema.methods.generateRefreshToken = function() {
     jwt.sign(
         {
             _id: this._id,
-            email: this.email,
-            fullName: this.fullName
         },
-        process.env.ACCESS_TOKEN_SECRET,
+        process.env.REFRESH_TOKEN_SECRET,
         {
-            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
     )
 }
 
 buyerSchema.plugin(mongooseAggregatePaginate)
 
-module.exports = mongoose.model("Buyer", buyerSchema)
+const buyerModel = mongoose.model("Buyer", buyerSchema)
+module.exports = buyerModel

@@ -7,7 +7,8 @@ const farmerSchema = new mongoose.Schema({
     fullName: {
         type: String,
         required: true,
-        index: true
+        index: true,
+        lowercase: true
     },
     mobileNumber: {
         type: String,
@@ -57,6 +58,33 @@ farmerSchema.methods.isPasswordCorrect = async function(password) {
     return await bcrypt.compare(password, this.password)
 }
 
+farmerSchema.methods.generateAccessToken = function() {
+    jwt.sign(
+        {
+            _id: this._id,
+            aadharNumber: this.aadharNumber,
+            fullName: this.fullName
+        },
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+            expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+        }
+    )
+}
+
+farmerSchema.methods.generateRefreshToken = function() {
+    jwt.sign(
+        {
+            _id: this._id,
+        },
+        process.env.REFRESH_TOKEN_SECRET,
+        {
+            expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+        }
+    )
+}
+
 farmerSchema.plugin(mongooseAggregatePaginate)
 
-module.exports = mongoose.model("Farmer", farmerSchema)
+const farmerModel = mongoose.model("Farmer", farmerSchema)
+module.exports = farmerModel

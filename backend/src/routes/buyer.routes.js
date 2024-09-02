@@ -1,7 +1,8 @@
 const Router = require('express');
-const { registerBuyer, loginBuyer } = require('../controllers/buyer.controller');
+const { registerBuyer, loginBuyer, logoutBuyer } = require('../controllers/buyer.controller');
 const router = Router();
 const upload = require('../middlewares/multer.middleware');
+const verifyJWT_buyer = require('../middlewares/auth_buyer.middleware');
 
 // Route for registering a farmer with profile picture upload
 router.route('/register').post(
@@ -9,7 +10,14 @@ router.route('/register').post(
     registerBuyer
 );
 
-// Route for logging in a farmer
-// router.route('/login').post(loginFarmer);
+router.route('/login').post(
+    loginBuyer
+)
+
+// secured routes
+router.route('/logout').post(
+    verifyJWT_buyer,
+    logoutBuyer
+)
 
 module.exports = router;
