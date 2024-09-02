@@ -13,4 +13,14 @@ app.use(express.urlencoded({ extended: true })) // for accepting the data throug
 app.use(express.static('public')) // for storing the static content
 app.use(cookieParser()) // for performing crud operations on user cookies in browser
 
-module.exports = { app }
+
+// routes import
+const farmerRouter = require('./routes/farmer.routes.js')
+
+
+//routes declaration
+app.use('/api/v1/farmers', farmerRouter)
+
+
+
+module.exports = {app}
