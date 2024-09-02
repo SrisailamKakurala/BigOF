@@ -9,7 +9,6 @@ const RegisterBuyer = () => {
         confirmPassword: '',
         email: '',
         address: '',
-        govtId: '',
         profileImage: null, // Add profileImage to formData
     });
 
@@ -149,17 +148,6 @@ const RegisterBuyer = () => {
                         placeholder="Address"
                         className="w-full p-4 text-sm border border-gray-300 rounded-lg focus:outline-none"
                         value={formData.address}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-6">
-                    <input
-                        type="text"
-                        name="govtId"
-                        placeholder="Govt ID/Business License"
-                        className="w-full p-4 text-sm border border-gray-300 rounded-lg focus:outline-none"
-                        value={formData.govtId}
                         onChange={handleChange}
                         required
                     />

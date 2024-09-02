@@ -40,8 +40,79 @@ const Testimonials = ({ testFrom }) => {
             fullname: 'Vikram Singh',
             designation: 'Farmer',
             location: 'Rajasthan'
+        },
+        {
+            img: 'https://images.pexels.com/photos/1234567/pexels-photo-1234567.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'Kisaan Sathi has made it easier for us to find buyers and sell our produce efficiently. Excellent service!',
+            fullname: 'Meera Patel',
+            designation: 'Farmer',
+            location: 'Gujarat'
+        },
+        {
+            img: 'https://images.pexels.com/photos/2345678/pexels-photo-2345678.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'I have been using Kisaan Sathi for months, and it has been a game-changer for sourcing high-quality produce.',
+            fullname: 'Rajesh Kumar',
+            designation: 'Buyer',
+            location: 'Kolkata'
+        },
+        {
+            img: 'https://images.pexels.com/photos/3456789/pexels-photo-3456789.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'The platform’s user-friendly interface and customer support have made my experience very smooth.',
+            fullname: 'Sunita Devi',
+            designation: 'Buyer',
+            location: 'Uttar Pradesh'
+        },
+        {
+            img: 'https://images.pexels.com/photos/4567890/pexels-photo-4567890.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'Kisaan Sathi provides valuable resources and support for farmers. I highly recommend it for anyone in agriculture.',
+            fullname: 'Arun Singh',
+            designation: 'Farmer',
+            location: 'Madhya Pradesh'
+        },
+        {
+            img: 'https://images.pexels.com/photos/5678901/pexels-photo-5678901.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'As a buyer, I find Kisaan Sathi very reliable for purchasing fresh and organic produce directly from farmers.',
+            fullname: 'Nisha Rani',
+            designation: 'Buyer',
+            location: 'Bihar'
+        },
+        {
+            img: 'https://images.pexels.com/photos/6789012/pexels-photo-6789012.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'Kisaan Sathi’s platform is very effective for connecting with buyers. It has improved my farming business significantly.',
+            fullname: 'Deepak Sharma',
+            designation: 'Farmer',
+            location: 'Jharkhand'
+        },
+        {
+            img: 'https://images.pexels.com/photos/7890123/pexels-photo-7890123.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'The customer service and support from Kisaan Sathi are exceptional. It’s a must-use for anyone in the farming industry.',
+            fullname: 'Rekha Verma',
+            designation: 'Buyer',
+            location: 'Himachal Pradesh'
+        },
+        {
+            img: 'https://images.pexels.com/photos/8901234/pexels-photo-8901234.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'I am very satisfied with Kisaan Sathi’s services. The platform is user-friendly and very helpful for managing farm sales.',
+            fullname: 'Kiran Patel',
+            designation: 'Farmer',
+            location: 'Assam'
+        },
+        {
+            img: 'https://images.pexels.com/photos/9012345/pexels-photo-9012345.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'Kisaan Sathi is a fantastic resource for buyers looking to get fresh and quality produce from local farmers.',
+            fullname: 'Rajveer Singh',
+            designation: 'Buyer',
+            location: 'Odisha'
+        },
+        {
+            img: 'https://images.pexels.com/photos/1234568/pexels-photo-1234568.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'The platform has simplified the selling process for us. It’s a great tool for both farmers and buyers.',
+            fullname: 'Jaya Devi',
+            designation: 'Farmer',
+            location: 'Kerala'
         }
     ];
+    
     
 
     return (

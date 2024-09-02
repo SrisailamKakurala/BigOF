@@ -1,10 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 const OTPVerification = () => {
     const [otp, setOtp] = useState(['', '', '', '']);
+    const [otpSent, setOtpSent] = useState(false);
+    const [popupMessage, setPopupMessage] = useState('');
     const location = useLocation();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (location.state && location.state.otpSent) {
+            setOtpSent(true);
+            setPopupMessage('OTP sent successfully!');
+            setTimeout(() => {
+                setPopupMessage('');
+            }, 3000); // Hide the popup message after 3 seconds
+        }
+    }, [location.state]);
 
     const handleChange = (e, index) => {
         const value = e.target.value;
@@ -81,6 +93,11 @@ const OTPVerification = () => {
                     Verify
                 </button>
             </form>
+            {popupMessage && (
+                <div className="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg">
+                    {popupMessage}
+                </div>
+            )}
         </div>
     );
 };
