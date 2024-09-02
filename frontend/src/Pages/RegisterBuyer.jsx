@@ -7,9 +7,8 @@ const RegisterBuyer = () => {
         phoneNumber: '',
         password: '',
         confirmPassword: '',
-        companyRegistrationNumber: '',
-        businessType: '',
-        businessLocation: '',
+        email: '',
+        address: '',
         govtId: '',
         profileImage: null, // Add profileImage to formData
     });
@@ -135,20 +134,10 @@ const RegisterBuyer = () => {
                 <div className="mb-4">
                     <input
                         type="text"
-                        name="companyRegistrationNumber"
-                        placeholder="Company Registration Number (if applicable)"
+                        name="email"
+                        placeholder="Email id"
                         className="w-full p-4 text-sm border border-gray-300 rounded-lg focus:outline-none"
-                        value={formData.companyRegistrationNumber}
-                        onChange={handleChange}
-                    />
-                </div>
-                <div className="mb-4">
-                    <input
-                        type="text"
-                        name="businessType"
-                        placeholder="Business Type"
-                        className="w-full p-4 text-sm border border-gray-300 rounded-lg focus:outline-none"
-                        value={formData.businessType}
+                        value={formData.email}
                         onChange={handleChange}
                         required
                     />
@@ -156,10 +145,10 @@ const RegisterBuyer = () => {
                 <div className="mb-4">
                     <input
                         type="text"
-                        name="businessLocation"
-                        placeholder="Business Location"
+                        name="address"
+                        placeholder="Address"
                         className="w-full p-4 text-sm border border-gray-300 rounded-lg focus:outline-none"
-                        value={formData.businessLocation}
+                        value={formData.address}
                         onChange={handleChange}
                         required
                     />

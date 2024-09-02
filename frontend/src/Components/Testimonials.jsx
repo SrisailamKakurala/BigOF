@@ -1,183 +1,68 @@
-import React, { useRef } from 'react';
-import '../index.css'
+import React, { useRef, useState } from 'react';
+import '../index.css';
+import Testimonial from './Testimonial';
 
 const Testimonials = ({ testFrom }) => {
     const testimonialsRef = useRef(null);
 
+    const dummyTestimonials = [
+        {
+            img: 'https://images.pexels.com/photos/27605413/pexels-photo-27605413/free-photo-of-jaipur.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'Kisaan Sathi ने हमारे खेती के तरीके को पूरी तरह से बदल दिया है। समर्थन और बाजार की जानकारी अमूल्य है!',
+            fullname: 'Ravi Kumar',
+            designation: 'Farmer',
+            location: 'Punjab'
+        },
+        {
+            img: 'https://images.pexels.com/photos/27603168/pexels-photo-27603168/free-photo-of-fashion-eastern-dresses-by-dhanno.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'The platform has helped me find fresh produce directly from farmers. Highly recommended for quality!',
+            fullname: 'Anita Sharma',
+            designation: 'Buyer',
+            location: 'Delhi'
+        },
+        {
+            img: 'https://images.pexels.com/photos/14431137/pexels-photo-14431137.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'With Kisaan Sathi, I can now connect with buyers easily and get fair prices for my crops. Great service!',
+            fullname: 'Suresh Yadav',
+            designation: 'Farmer',
+            location: 'Haryana'
+        },
+        {
+            img: 'https://images.pexels.com/photos/20527526/pexels-photo-20527526/free-photo-of-farmers-in-india.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1', 
+            content: 'एक शानदार प्लेटफॉर्म जो गुणवत्ता और दक्षता सुनिश्चित करता है। मेरी खरीदारी का अनुभव सुचारू और भरोसेमंद रहा है।',
+            fullname: 'Pooja Gupta',
+            designation: 'Buyer', 
+            location: 'Mumbai'
+        },
+        {
+            img: 'https://images.pexels.com/photos/5933419/pexels-photo-5933419.jpeg?auto=compress&cs=tinysrgb&w=600', 
+            content: 'The insights and support provided by Kisaan Sathi are top-notch. It has made a significant difference in my farming!',
+            fullname: 'Vikram Singh',
+            designation: 'Farmer',
+            location: 'Rajasthan'
+        }
+    ];
+    
+
     return (
         <section id='testimonials' className="text-gray-600 body-font py-20">
             <div className="flex flex-col text-center w-full mb-3">
-                <h2 className="text-xs text-green-500 tracking-widest font-medium title-font mb-1">BIGOF</h2>
+                <h2 className="text-xs text-green-500 tracking-widest font-medium title-font mb-1">KISAAN SATHI</h2>
                 <h1 className="sm:text-3xl text-3xl font-medium title-font text-gray-900">Testimonials from {testFrom}</h1>
             </div>
             <div className="container px-0 py-24 mx-auto overflow-hidden">
                 <div className="flex gap-10 overflow-x-scroll scrollbar-hide" ref={testimonialsRef}>
-                    <div className="lg:w-1/3 md:w-1/2 w-[90%] ml-5 flex-shrink-0 p-4 bg-green-500 rounded-lg">
-                        <div className="h-full text-center p-6">
-                            <img
-                                alt="testimonial"
-                                className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                                src="https://dummyimage.com/302x302"
-                            />
-                            <p className="leading-relaxed text-white">
-                                Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk.
-                            </p>
-                            <span className="inline-block h-1 w-10 rounded bg-white mt-6 mb-4"></span>
-                            <h2 className="text-white font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
-                            <p className="text-gray-200">Senior Product Designer</p>
-                        </div>
-                    </div>
-                    <div className="lg:w-1/3 md:w-1/2 w-[90%] flex-shrink-0 p-4 bg-green-500 rounded-lg">
-                        <div className="h-full text-center p-6">
-                            <img
-                                alt="testimonial"
-                                className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                                src="https://dummyimage.com/302x302"
-                            />
-                            <p className="leading-relaxed text-white">
-                                Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk.
-                            </p>
-                            <span className="inline-block h-1 w-10 rounded bg-white mt-6 mb-4"></span>
-                            <h2 className="text-white font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
-                            <p className="text-gray-200">Senior Product Designer</p>
-                        </div>
-                    </div>
-                    <div className="lg:w-1/3 md:w-1/2 w-[90%] flex-shrink-0 p-4 bg-green-500 rounded-lg">
-                        <div className="h-full text-center p-6">
-                            <img
-                                alt="testimonial"
-                                className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                                src="https://dummyimage.com/302x302"
-                            />
-                            <p className="leading-relaxed text-white">
-                                Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk.
-                            </p>
-                            <span className="inline-block h-1 w-10 rounded bg-white mt-6 mb-4"></span>
-                            <h2 className="text-white font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
-                            <p className="text-gray-200">Senior Product Designer</p>
-                        </div>
-                    </div>
-                    <div className="lg:w-1/3 md:w-1/2 w-[90%] flex-shrink-0 p-4 bg-green-500 rounded-lg">
-                        <div className="h-full text-center p-6">
-                            <img
-                                alt="testimonial"
-                                className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                                src="https://dummyimage.com/302x302"
-                            />
-                            <p className="leading-relaxed text-white">
-                                Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk.
-                            </p>
-                            <span className="inline-block h-1 w-10 rounded bg-white mt-6 mb-4"></span>
-                            <h2 className="text-white font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
-                            <p className="text-gray-200">Senior Product Designer</p>
-                        </div>
-                    </div>
-                    <div className="lg:w-1/3 md:w-1/2 w-[90%] flex-shrink-0 p-4 bg-green-500 rounded-lg">
-                        <div className="h-full text-center p-6">
-                            <img
-                                alt="testimonial"
-                                className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                                src="https://dummyimage.com/302x302"
-                            />
-                            <p className="leading-relaxed text-white">
-                                Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk.
-                            </p>
-                            <span className="inline-block h-1 w-10 rounded bg-white mt-6 mb-4"></span>
-                            <h2 className="text-white font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
-                            <p className="text-gray-200">Senior Product Designer</p>
-                        </div>
-                    </div>
-                    <div className="lg:w-1/3 md:w-1/2 w-[90%] flex-shrink-0 p-4 bg-green-500 rounded-lg">
-                        <div className="h-full text-center p-6">
-                            <img
-                                alt="testimonial"
-                                className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                                src="https://dummyimage.com/302x302"
-                            />
-                            <p className="leading-relaxed text-white">
-                                Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk.
-                            </p>
-                            <span className="inline-block h-1 w-10 rounded bg-white mt-6 mb-4"></span>
-                            <h2 className="text-white font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
-                            <p className="text-gray-200">Senior Product Designer</p>
-                        </div>
-                    </div>
-                    <div className="lg:w-1/3 md:w-1/2 w-[90%] flex-shrink-0 p-4 bg-green-500 rounded-lg">
-                        <div className="h-full text-center p-6">
-                            <img
-                                alt="testimonial"
-                                className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                                src="https://dummyimage.com/302x302"
-                            />
-                            <p className="leading-relaxed text-white">
-                                Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk.
-                            </p>
-                            <span className="inline-block h-1 w-10 rounded bg-white mt-6 mb-4"></span>
-                            <h2 className="text-white font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
-                            <p className="text-gray-200">Senior Product Designer</p>
-                        </div>
-                    </div>
-                    <div className="lg:w-1/3 md:w-1/2 w-[90%] flex-shrink-0 p-4 bg-green-500 rounded-lg">
-                        <div className="h-full text-center p-6">
-                            <img
-                                alt="testimonial"
-                                className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                                src="https://dummyimage.com/302x302"
-                            />
-                            <p className="leading-relaxed text-white">
-                                Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk.
-                            </p>
-                            <span className="inline-block h-1 w-10 rounded bg-white mt-6 mb-4"></span>
-                            <h2 className="text-white font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
-                            <p className="text-gray-200">Senior Product Designer</p>
-                        </div>
-                    </div>
-                    <div className="lg:w-1/3 md:w-1/2 w-[90%] flex-shrink-0 p-4 bg-green-500 rounded-lg">
-                        <div className="h-full text-center p-6">
-                            <img
-                                alt="testimonial"
-                                className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                                src="https://dummyimage.com/302x302"
-                            />
-                            <p className="leading-relaxed text-white">
-                                Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk.
-                            </p>
-                            <span className="inline-block h-1 w-10 rounded bg-white mt-6 mb-4"></span>
-                            <h2 className="text-white font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
-                            <p className="text-gray-200">Senior Product Designer</p>
-                        </div>
-                    </div>
-                    <div className="lg:w-1/3 md:w-1/2 w-[90%] flex-shrink-0 p-4 bg-green-500 rounded-lg">
-                        <div className="h-full text-center p-6">
-                            <img
-                                alt="testimonial"
-                                className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                                src="https://dummyimage.com/302x302"
-                            />
-                            <p className="leading-relaxed text-white">
-                                Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk.
-                            </p>
-                            <span className="inline-block h-1 w-10 rounded bg-white mt-6 mb-4"></span>
-                            <h2 className="text-white font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
-                            <p className="text-gray-200">Senior Product Designer</p>
-                        </div>
-                    </div>
-                    <div className="lg:w-1/3 md:w-1/2 w-[90%] flex-shrink-0 p-4 bg-green-500 rounded-lg">
-                        <div className="h-full text-center p-6">
-                            <img
-                                alt="testimonial"
-                                className="w-20 h-20 mb-8 object-cover object-center rounded-full inline-block border-2 border-gray-200 bg-gray-100"
-                                src="https://dummyimage.com/302x302"
-                            />
-                            <p className="leading-relaxed text-white">
-                                Edison bulb retro cloud bread echo park, helvetica stumptown taiyaki taxidermy 90's cronut +1 kinfolk.
-                            </p>
-                            <span className="inline-block h-1 w-10 rounded bg-white mt-6 mb-4"></span>
-                            <h2 className="text-white font-medium title-font tracking-wider text-sm">HOLDEN CAULFIELD</h2>
-                            <p className="text-gray-200">Senior Product Designer</p>
-                        </div>
-                    </div>
-                    {/* Repeat similar blocks for other testimonials */}
+                
+                    {dummyTestimonials.filter((testimonial)=>testimonial.designation==testFrom)
+                    .map((testimonial, index) => (
+                        <Testimonial
+                            key={index}
+                            img={testimonial.img}
+                            content={testimonial.content}
+                            fullname={testimonial.fullname}
+                            location={testimonial.location}
+                        />
+                    ))}
                 </div>
             </div>
         </section>

@@ -8,8 +8,7 @@ const RegisterForm = () => {
         phoneNumber: '',
         password: '',
         confirmPassword: '',
-        farmLocation: '',
-        farmSize: '',
+        address: '',
         identification: '',
         profileImage: null, 
     });
@@ -135,21 +134,10 @@ const RegisterForm = () => {
                 <div className="mb-4">
                     <input
                         type="text"
-                        name="farmLocation"
-                        placeholder="Farm Location"
+                        name="address"
+                        placeholder="Address"
                         className="w-full p-4 text-sm border border-gray-300 rounded-lg focus:outline-none"
-                        value={formData.farmLocation}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
-                <div className="mb-4">
-                    <input
-                        type="text"
-                        name="farmSize"
-                        placeholder="Farm Size"
-                        className="w-full p-4 text-sm border border-gray-300 rounded-lg focus:outline-none"
-                        value={formData.farmSize}
+                        value={formData.address}
                         onChange={handleChange}
                         required
                     />
