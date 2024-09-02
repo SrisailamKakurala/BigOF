@@ -16,10 +16,12 @@ app.use(cookieParser()) // for performing crud operations on user cookies in bro
 
 // routes import
 const farmerRouter = require('./routes/farmer.routes.js')
+const buyerRouter = require('./routes/buyer.routes.js')
 
 
 //routes declaration
 app.use('/api/v1/farmers', farmerRouter)
+app.use('/api/v1/buyers', buyerRouter)
 
 
 
