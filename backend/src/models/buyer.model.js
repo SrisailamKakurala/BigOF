@@ -26,6 +26,7 @@ const buyerSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true,
+        index: true
     },
     profilePicture: {
         type: String,

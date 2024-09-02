@@ -21,13 +21,10 @@ const farmerSchema = new mongoose.Schema({
     address: {
         type: String,
         required: true,
+        index: true
     },
     cropsGrown: {
         type: [String], // Array of crops
-    },
-    email: {
-        type: String,
-        unique: true
     },
     aadharNumber: {
         type: String,
@@ -36,6 +33,9 @@ const farmerSchema = new mongoose.Schema({
     profilePicture: {
         type: String,
         default: ''
+    },
+    refreshToken: {
+        type: String,
     },
     unreadMessagesCount: {
         type: Number,
@@ -47,9 +47,9 @@ const farmerSchema = new mongoose.Schema({
     },
 }, { timestamps: true })
 
-farmerSchema.pre("save", function (next) {
+farmerSchema.pre("save", async function (next) {
     if(!this.isModified("password")) next()
-    this.password = bcrypt.hash(this.password, 10)
+    this.password = await bcrypt.hash(this.password, 10)
     next()
 })
 
