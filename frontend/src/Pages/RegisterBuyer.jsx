@@ -54,40 +54,41 @@ const RegisterBuyer = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+        navigate('/verifyotp');
+        // e.preventDefault();
 
-        const formErrors = validateForm();
-        if (Object.keys(formErrors).length > 0) {
-            setErrors(formErrors);
-            return;
-        }
+        // const formErrors = validateForm();
+        // if (Object.keys(formErrors).length > 0) {
+        //     setErrors(formErrors);
+        //     return;
+        // }
 
-        setIsSubmitting(true);
+        // setIsSubmitting(true);
 
-        const formDataToSend = new FormData();
-        Object.entries(formData).forEach(([key, value]) => {
-            formDataToSend.append(key, value);
-        });
+        // const formDataToSend = new FormData();
+        // Object.entries(formData).forEach(([key, value]) => {
+        //     formDataToSend.append(key, value);
+        // });
 
-        try {
-            const response = await fetch('/api/send-otp', {
-                method: 'POST',
-                body: formDataToSend,
-            });
+        // try {
+        //     const response = await fetch('/api/send-otp', {
+        //         method: 'POST',
+        //         body: formDataToSend,
+        //     });
 
-            if (response.ok) {
-                const data = await response.json();
-                console.log('OTP sent successfully:', data);
-                navigate('/verify', { state: { formData } });
-            } else {
-                console.error('Failed to send OTP');
-                navigate('/verifyotp', { state: { formData } });
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        } finally {
-            setIsSubmitting(false);
-        }
+        //     if (response.ok) {
+        //         const data = await response.json();
+        //         console.log('OTP sent successfully:', data);
+        //         navigate('/verify', { state: { formData } });
+        //     } else {
+        //         console.error('Failed to send OTP');
+        //         navigate('/verifyotp', { state: { formData } });
+        //     }
+        // } catch (error) {
+        //     console.error('Error:', error);
+        // } finally {
+        //     setIsSubmitting(false);
+        // }
     };
 
     return (

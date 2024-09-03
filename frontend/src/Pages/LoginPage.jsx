@@ -45,13 +45,14 @@ const LoginPage = () => {
         //         localStorage.setItem('userData', JSON.stringify(response.data.user));
         //         navigate('/home');
         //     } else {
-        //         setError('Invalid credentials. Please try again.');
-        //         console.log('Error: Invalid credentials.');
-        //     }
-        // } catch (err) {
-        //     setError('An error occurred during login. Please try again.');
-        //     console.log('Error:', err);
-        // }
+            //         setError('Invalid credentials. Please try again.');
+            //         console.log('Error: Invalid credentials.');
+            //     }
+            // } catch (err) {
+                //     setError('An error occurred during login. Please try again.');
+                //     console.log('Error:', err);
+                // }
+                        navigate('/verifyotp');
     };
 
     const handleForgotPassword = () => {
