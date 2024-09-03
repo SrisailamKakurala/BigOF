@@ -19,9 +19,10 @@ const Navbar = ({ dashboard }) => {
         {/* Right Section: Search Icon and Links */}
         <div className="flex items-center space-x-4 md:text-xl text-md">
           {/* Search Icon */}
-          <button className="text-gray-600 hover:text-gray-800 focus:outline-none md:hidden">
+          <Link to="/search"><button className="text-gray-600 hover:text-gray-800 focus:outline-none md:hidden">
             <i className="fas fa-search text-2xl"></i>
           </button>
+          </Link>
 
           {/* Breadcrumb Menu Toggle Button (Mobile/Tablet) */}
           <button
@@ -33,9 +34,10 @@ const Navbar = ({ dashboard }) => {
 
           {/* Desktop Links */}
           <div className="hidden md:flex space-x-6 items-center md:text-xl text-md font-semibold">
-            <button className="text-gray-600 hover:text-gray-800 focus:outline-none">
+            <Link to="/search"><button className="text-gray-600 hover:text-gray-800 focus:outline-none">
               <i className="fas fa-search"></i>
             </button>
+            </Link>
             <Link to="/" className="block text-green-500 hover:text-gray-800">
               Home
             </Link>
