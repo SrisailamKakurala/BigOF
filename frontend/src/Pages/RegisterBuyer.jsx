@@ -58,7 +58,7 @@ const RegisterBuyer = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-green-500 py-5">
+        <div className="min-h-screen flex items-center justify-center bg-green-500 py-5 px-5 md:bg-[url('https://www.pngall.com/wp-content/uploads/6/Grass-Ground-PNG-Free-Image.png')] bg-cover">
             <form className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg" onSubmit={handleSubmit}>
                 <div className="mb-4 text-center">
                     <input
@@ -78,7 +78,7 @@ const RegisterBuyer = () => {
                                     className="object-cover w-full h-full"
                                 />
                             ) : (
-                                <div className="w-full h-full flex items-center justify-center text-gray-400">
+                                <div className="w-full h-full flex items-center justify-center text-gray-400 p-4">
                                     <span>Select Profile Image</span>
                                 </div>
                             )}

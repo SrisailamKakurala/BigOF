@@ -116,7 +116,7 @@ const Testimonials = ({ testFrom }) => {
     
 
     return (
-        <section id='testimonials' className="text-gray-600 body-font py-20">
+        <section id='testimonials' className="text-gray-600 body-font py-20 px-20">
             <div className="flex flex-col text-center w-full mb-3">
                 <h2 className="text-xs text-green-500 tracking-widest font-medium title-font mb-1">KISAAN SATHI</h2>
                 <h1 className="sm:text-3xl text-3xl font-medium title-font text-gray-900">Testimonials from {testFrom}</h1>

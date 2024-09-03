@@ -9,12 +9,12 @@ import { Link, Navigate } from "react-router-dom";
 
 const LandingPage = () => {
   return (
-    <div>
+    <div className="">
       <Navbar />
 
       {/* hero section */}
-      <section className="text-gray-600 body-font">
-  <div className="container mx-auto flex px-5 py-24 md:flex-row flex-col items-center">
+      <section className="text-gray-600 body-font px-20">
+  <div className="container mx-auto flex px-5 py-28 md:flex-row flex-col items-center">
     <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
       <h1 className="title-font sm:text-4xl text-3xl mb-4 font-medium text-gray-900">
         Empowering Farmers,
@@ -45,7 +45,7 @@ const LandingPage = () => {
       <div className="h-2 w-full bg-slate-200"></div>
 
       {/* featurs */}
-      <section id="features" className="text-gray-600 body-font -mt-5">
+      <section id="features" className="text-gray-600 body-font -mt-5 px-20">
   <div className="container px-5 py-24 mx-auto">
     <div className="flex flex-col text-center w-full mb-20">
       <h2 className="text-xs text-green-500 tracking-widest font-medium title-font mb-1">
@@ -187,7 +187,7 @@ const LandingPage = () => {
 
 
       {/* Benefits */}
-      <section className="text-gray-600 body-font -mt-20">
+      <section className="text-gray-600 body-font -mt-20 px-20">
   <div className="container px-5 py-24 mx-auto">
     <div className="flex flex-col text-center w-full mb-20">
       <h2 className="text-xs text-green-500 tracking-widest font-medium title-font mb-1">
