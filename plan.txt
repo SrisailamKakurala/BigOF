@@ -1,0 +1,156 @@
+/registerFarmer, ✅
+/loginFarmer, ✅
+/logoutFarmer, ✅
+/refreshAccessToken, ✅
+/changeCurrentPassword, ✅
+/getCurrentUser, ✅
+/send-otp 
+/profile
+/search-user
+/profile/:id
+/addCrop,
+/crop-details
+
+
+
+
+
+
+
+todo:
+
+1)
+- store the user dets in localstorage after clicking on register/login
+- send otp and store the sent otp in session
+- after clicking on verify otp, send the user dets with the enteredOtp to the server
+- if the otp in session and entered otp is matched then register/login the user else send error
+
+2)
+- change farmer and buyer schema according to profile and requirements
+
+3)
+- user should be able to edit his profile
+- farmer should be able to add crops that he/she want to sell
+- buyer should be able to find farmer profiles based on place or crop 
+- buyer should be able to view crop details and can add the crop to his cart
+- buyer should be able to put an order for the crops and generate a contract  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// controllers/buyerController.js
+const Buyer = require('../models/Buyer');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
+
+// Dummy OTP function
+function generateOTP() {
+    return crypto.randomInt(100000, 999999).toString();
+}
+
+// Send OTP
+exports.sendOtp = async (req, res) => {
+    const { mobileNumber, email } = req.body;
+
+    const otp = generateOTP();
+    req.session.otp = crypto.createHash('sha256').update(otp).digest('hex'); // Hash OTP before storing
+    req.session.otpExpiry = Date.now() + 300000; // OTP valid for 5 minutes
+
+    // Implement your OTP sending logic here (e.g., using an SMS or email service)
+    console.log(`OTP sent to ${email}: ${otp}`);
+
+    res.status(200).json({ message: 'OTP sent successfully' });
+};
+
+// Verify OTP and Register
+exports.register = async (req, res) => {
+    const { fullName, mobileNumber, email, password, enteredOtp } = req.body;
+
+    if (!req.session.otp || Date.now() > req.session.otpExpiry) {
+        return res.status(400).json({ message: 'OTP expired. Please request a new one.' });
+    }
+
+    const hashedOtp = crypto.createHash('sha256').update(enteredOtp).digest('hex');
+    if (hashedOtp !== req.session.otp) {
+        return res.status(400).json({ message: 'Invalid OTP' });
+    }
+
+    try {
+        const buyer = new Buyer({ fullName, mobileNumber, email, password });
+        await buyer.save();
+
+        req.session.otp = null; // Clear OTP after successful registration
+        res.status(201).json({ message: 'User registered successfully' });
+    } catch (err) {
+        res.status(500).json({ message: 'Registration failed', error: err.message });
+    }
+};
+
+// Verify OTP and Login
+exports.login = async (req, res) => {
+    const { email, password, enteredOtp } = req.body;
+
+    if (!req.session.otp || Date.now() > req.session.otpExpiry) {
+        return res.status(400).json({ message: 'OTP expired. Please request a new one.' });
+    }
+
+    const hashedOtp = crypto.createHash('sha256').update(enteredOtp).digest('hex');
+    if (hashedOtp !== req.session.otp) {
+        return res.status(400).json({ message: 'Invalid OTP' });
+    }
+
+    try {
+        const buyer = await Buyer.findOne({ email });
+        if (!buyer || !(await buyer.isPasswordCorrect(password))) {
+            return res.status(401).json({ message: 'Invalid email or password' });
+        }
+
+        req.session.otp = null; // Clear OTP after successful login
+        res.status(200).json({ message: 'Login successful' });
+    } catch (err) {
+        res.status(500).json({ message: 'Login failed', error: err.message });
+    }
+};

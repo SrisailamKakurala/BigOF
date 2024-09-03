@@ -12,6 +12,11 @@ app.use(express.json()) // parsing the data to json
 app.use(express.urlencoded({ extended: true })) // for accepting the data through the url 
 app.use(express.static('public')) // for storing the static content
 app.use(cookieParser()) // for performing crud operations on user cookies in browser
+app.use(session({
+    secret: process.env.SESSION_SECRET || 'mySecet', 
+    resave: false,
+    saveUninitialized: true,
+}));
 
 
 // routes import
