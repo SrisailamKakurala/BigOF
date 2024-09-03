@@ -95,7 +95,7 @@ const Navbar = ({ dashboard }) => {
             <Link to="/deliverytracking" className="block text-green-500 hover:text-gray-800">
               Delivery Tracking
             </Link>
-            <Link to="/profile" className="block text-green-500 hover:text-gray-800 flex gap-2 items-center">
+            <Link to="/profile" className="text-green-500 hover:text-gray-800 flex gap-2 items-center">
               <i className="fas fa-user"></i> Profile
             </Link>
           </div>
