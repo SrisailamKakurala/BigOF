@@ -2,7 +2,7 @@ import React from "react";
 
 function ContactUs() {
   return (
-    <div id="contactus" className="bg-green-500 py-12">
+    <div id="contactus" className="bg-green-500 py-16">
       <div className="container mx-auto px-4 sm:px-8 lg:px-16">
         <h2 className="text-white text-3xl sm:text-4xl font-bold text-center mb-8">
           Contact Us
