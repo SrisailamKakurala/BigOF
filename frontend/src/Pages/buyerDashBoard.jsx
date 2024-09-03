@@ -1,8 +1,11 @@
 import React from 'react'
+import Navbar from '../Components/DashBoardComponents/Navbar'
 
 const buyerDashBoard = () => {
   return (
-    <div>buyerDashBoard</div>
+    <div>
+        <Navbar />
+    </div>
   )
 }
 
