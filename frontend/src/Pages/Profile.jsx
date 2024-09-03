@@ -30,7 +30,7 @@ const Profile = ({ isOwner }) => {
   const totalValue = 350000; // Assuming you calculate the total value from the contracts
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center p-4">
+    <div className="min-h-[85vh] bg-white flex flex-col items-center px-4 py-24">
       <div className="w-full max-w-3xl bg-green-500 text-white rounded-lg shadow-lg p-6">
         <div className="flex flex-col md:flex-row items-center space-x-0 md:space-x-4 space-y-4 md:space-y-0">
           <div className="w-24 h-24 rounded-full bg-white overflow-hidden">
@@ -91,7 +91,7 @@ const Profile = ({ isOwner }) => {
         {/* Crops Purchased or Sold Section */}
         {contracts.length > 0 && (
           <div className="mt-6">
-            <h2 className="text-xl font-semibold">Crops Purchased or Sold</h2>
+            <h2 className="text-xl font-semibold">Crops Purchased</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4">
               {contracts.map((contract) => (
                 <div key={contract.id} className="bg-white text-green-700 p-4 rounded-lg shadow-md">

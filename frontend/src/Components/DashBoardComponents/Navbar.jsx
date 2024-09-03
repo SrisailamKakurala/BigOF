@@ -6,7 +6,7 @@ const Navbar = ({ dashboard }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
-    <nav className="xl:px-20 lg:px-20 md:px-8 px-[1px] bg-white border-b border-gray-200 shadow-md rounded-b-md">
+    <nav className="fixed top-0 left-0 w-full z-10 xl:px-20 lg:px-20 md:px-8 px-[1px] bg-white border-b border-gray-200 shadow-md rounded-b-md">
       <div className="mx-auto px-4 py-[2px] flex justify-between items-center">
         {/* Left Section: Logo */}
         <div className="text-xl font-bold text-gray-800">
@@ -19,9 +19,10 @@ const Navbar = ({ dashboard }) => {
         {/* Right Section: Search Icon and Links */}
         <div className="flex items-center space-x-4 md:text-xl text-md">
           {/* Search Icon */}
-          <Link to="/search"><button className="text-gray-600 hover:text-gray-800 focus:outline-none md:hidden">
-            <i className="fas fa-search text-2xl"></i>
-          </button>
+          <Link to="/search">
+            <button className="text-gray-600 hover:text-gray-800 focus:outline-none md:hidden">
+              <i className="fas fa-search text-2xl"></i>
+            </button>
           </Link>
 
           {/* Breadcrumb Menu Toggle Button (Mobile/Tablet) */}
@@ -34,9 +35,10 @@ const Navbar = ({ dashboard }) => {
 
           {/* Desktop Links */}
           <div className="hidden md:flex space-x-6 items-center md:text-xl text-md font-semibold">
-            <Link to="/search"><button className="text-gray-600 hover:text-gray-800 focus:outline-none">
-              <i className="fas fa-search"></i>
-            </button>
+            <Link to="/search">
+              <button className="text-gray-600 hover:text-gray-800 focus:outline-none">
+                <i className="fas fa-search"></i>
+              </button>
             </Link>
             <Link to="/" className="block text-green-500 hover:text-gray-800">
               Home
@@ -69,41 +71,29 @@ const Navbar = ({ dashboard }) => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 absolute z-9">
+        <div className="md:hidden bg-white border-t border-gray-200 absolute z-9 w-full">
           <div className="px-4 py-3 space-y-2">
             <Link to="/" className="block text-green-500 hover:text-gray-800">
-              <div className='w-[100vw]'>
-                Home
-              </div>
+              Home
             </Link>
             <Link to="/marketplace" className="block text-green-500 hover:text-gray-800">
-              <div className='w-[100vw]'>
-                Marketplace
-              </div>
+              Marketplace
             </Link>
             {/* Conditionally render Cart or Crop based on the dashboard prop */}
             {dashboard === 'farmer' ? (
               <Link to="/addcrop" className="block text-green-500 hover:text-gray-800">
-                <div className='w-[100vw]'>
-                  Sell Crop
-                </div>
+                Sell Crop
               </Link>
             ) : (
               <Link to="/cart" className="block text-green-500 hover:text-gray-800">
-                <div className='w-[100vw]'>
-                  Cart
-                </div>
+                Cart
               </Link>
             )}
             <Link to="/mycontracts" className="block text-green-500 hover:text-gray-800">
-              <div className='w-[100vw]'>
-                My Contracts
-              </div>
+              My Contracts
             </Link>
             <Link to="/deliverytracking" className="block text-green-500 hover:text-gray-800">
-              <div className='w-[100vw]'>
-                Delivery Tracking
-              </div>
+              Delivery Tracking
             </Link>
             <Link to="/profile" className="block text-green-500 hover:text-gray-800 flex gap-2 items-center">
               <i className="fas fa-user"></i> Profile
