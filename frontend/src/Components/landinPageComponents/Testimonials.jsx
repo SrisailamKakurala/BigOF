@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import '../index.css';
+import '/src/index.css';
 import Testimonial from './Testimonial';
 
 const Testimonials = ({ testFrom }) => {

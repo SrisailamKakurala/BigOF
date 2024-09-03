@@ -1,10 +1,10 @@
 import React from "react";
-import Navbar from "../Components/Navbar";
+import Navbar from "../Components/landinPageComponents/Navbar";
 import Logo from "../assets/images/logo.png";
-import Testimonials from "../Components/Testimonials";
-import Footer from "../Components/Footer";
-import DemoSection from "../Components/DemoSection";
-import ContactUs from "../Components/ContactUs";
+import Testimonials from "../Components/landinPageComponents/Testimonials";
+import Footer from "../Components/landinPageComponents/Footer";
+import DemoSection from "../Components/landinPageComponents/DemoSection";
+import ContactUs from "../Components/landinPageComponents/ContactUs";
 import { Link, Navigate } from "react-router-dom";
 
 const LandingPage = () => {
