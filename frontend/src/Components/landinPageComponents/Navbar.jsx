@@ -4,7 +4,7 @@ import { Link, Navigate } from 'react-router-dom'
 
 const Navbar = () => {
     return (
-        <header className='h-[70px] fixed bg-transparent w-full bg-white shadow-xl rounded-xl px-4 md:px-10 lg:px-20 flex items-center justify-between'>
+        <header className='h-[70px] z-50 fixed bg-transparent w-full bg-white shadow-xl rounded-xl px-4 md:px-10 lg:px-20 flex items-center justify-between'>
             <div className="logo">
                 <Link>
                     <img src={Logo} className='h-[65px] w-[65px]' alt="BigOF Logo" />
