@@ -1,5 +1,13 @@
 import React, { useState } from 'react';
 
+const certificationOptions = [
+  "India Organic",
+  "NPOP (National Programme for Organic Production)",
+  "USDA Organic",
+  "EU Organic",
+  "JAS (Japanese Agricultural Standard)"
+];
+
 const AddCrop = () => {
   const [formData, setFormData] = useState({
     cropName: '',
@@ -11,11 +19,18 @@ const AddCrop = () => {
     description: '',
     cropImages: [],
     organicCertification: false,
+    certificationType: '',
+    fertilizerUsed: ''
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+
+  const handleCheckboxChange = (e) => {
+    const { name, checked } = e.target;
+    setFormData({ ...formData, [name]: checked });
   };
 
   const handleImageChange = (e) => {
@@ -26,11 +41,6 @@ const AddCrop = () => {
         cropImages: [...formData.cropImages, ...Array.from(files)],
       });
     }
-  };
-
-  const handleCheckboxChange = (e) => {
-    const { name, checked } = e.target;
-    setFormData({ ...formData, [name]: checked });
   };
 
   const handleSubmit = (e) => {
@@ -182,6 +192,29 @@ const AddCrop = () => {
             />
           </div>
 
+          {/* Certification Type */}
+          {formData.organicCertification && (
+            <div className="mb-4">
+              <label className="block text-gray-700 font-bold mb-2" htmlFor="certificationType">
+                Certification Type
+              </label>
+              <select
+                id="certificationType"
+                name="certificationType"
+                value={formData.certificationType}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none ring-2 ring-green-500 focus:ring-3"
+              >
+                <option value="" disabled>Select certification</option>
+                {certificationOptions.map((option, index) => (
+                  <option key={index} value={option}>
+                    {option}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
           {/* Fertilizer Used */}
           <div className="mb-4">
             <label className="block text-gray-700 font-bold mb-2" htmlFor="fertilizerUsed">
@@ -219,44 +252,45 @@ const AddCrop = () => {
                     src={URL.createObjectURL(image)}
                     alt={`Crop ${index + 1}`}
                     className="w-16 h-16 object-cover rounded-lg shadow-md"
-                  />
-                  <button
-                    type="button"
-                    onClick={() =>
-                      setFormData({
-                        ...formData,
-                        cropImages: formData.cropImages.filter((_, i) => i !== index),
-                      })
-                    }
-                    className="text-red-500 hover:text-red-700"
-                  >
-                    Remove
-                  </button>
-                </div>
-              ))}
+                    />
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setFormData({
+                          ...formData,
+                          cropImages: formData.cropImages.filter((_, i) => i !== index),
+                        })
+                      }
+                      className="text-red-500 hover:text-red-700"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+              <button
+                type="button"
+                onClick={() => document.getElementById('cropImage').click()}
+                className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg font-semibold shadow-md hover:bg-green-600 focus:outline-none ring-2 ring-green-500 focus:ring-3"
+              >
+                Add Another Image
+              </button>
             </div>
+          </div>
+  
+          {/* Submit Button */}
+          <div className="text-center mt-6">
             <button
-              type="button"
-              onClick={() => document.getElementById('cropImage').click()}
-              className="mt-4 px-4 py-2 bg-green-500 text-white rounded-lg font-semibold shadow-md hover:bg-green-600 focus:outline-none ring-2 ring-green-500 focus:ring-3"
+              type="submit"
+              className="px-4 py-2 bg-green-500 text-white rounded-lg font-semibold shadow-md hover:bg-green-600 focus:outline-none ring-2 ring-green-500 focus:ring-3"
             >
-              Add Another Image
+              Add Crop
             </button>
           </div>
-        </div>
-
-        {/* Submit Button */}
-        <div className="text-center mt-6">
-          <button
-            type="submit"
-            className="px-4 py-2 bg-green-500 text-white rounded-lg font-semibold shadow-md hover:bg-green-600 focus:outline-none ring-2 ring-green-500 focus:ring-3"
-          >
-            Add Crop
-          </button>
-        </div>
-      </form>
-    </div>
-  );
-};
-
-export default AddCrop;
+        </form>
+      </div>
+    );
+  };
+  
+  export default AddCrop;
+  
