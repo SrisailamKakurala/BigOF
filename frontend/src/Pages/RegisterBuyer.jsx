@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const RegisterBuyer = () => {
     const [formData, setFormData] = useState({
@@ -8,7 +9,7 @@ const RegisterBuyer = () => {
         password: '',
         confirmPassword: '',
         email: '',
-        address: ''
+        address: '',
     });
 
     const [errors, setErrors] = useState({});
@@ -56,15 +57,22 @@ const RegisterBuyer = () => {
 
         setIsSubmitting(true);
 
-        // Simulate OTP sending and navigate to OTP verification page
         try {
-            // Replace with actual API call for sending OTP
-            // await axios.post('/api/send-otp', { phoneNumber: formData.phoneNumber });
-
-            navigate('/verifyotp');
+            const response = await axios.post('http://localhost:8000/api/v1/buyers/register', formData);
+            if (response.status === 201) {
+                // Handle successful registration, e.g., navigate to another page or show a success message
+                console.log('Registration successful:', response.data);
+                navigate('/success'); // Replace with your success page route
+            }
         } catch (error) {
-            console.error("There was an error sending the OTP request:", error);
-            // Optionally handle error state here
+            // Handle error response
+            if (error.response) {
+                console.error('Registration failed:', error.response.data);
+                setErrors({ server: error.response.data.message || 'Registration failed. Please try again.' });
+            } else {
+                console.error('Error:', error.message);
+                setErrors({ server: 'An unexpected error occurred. Please try again later.' });
+            }
         } finally {
             setIsSubmitting(false);
         }
@@ -73,10 +81,8 @@ const RegisterBuyer = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-green-500 py-5 px-5 md:bg-[url('https://www.pngall.com/wp-content/uploads/6/Grass-Ground-PNG-Free-Image.png')] bg-cover">
             <form className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg" onSubmit={handleSubmit}>
-                <div className="mb-4 text-center">
-                    <h1 className="text-2xl font-bold mb-4">Register as Buyer</h1>
-                </div>
-
+                {errors.server && <p className="text-red-500 text-sm mb-4">{errors.server}</p>}
+                
                 <div className="mb-4">
                     <input
                         type="text"

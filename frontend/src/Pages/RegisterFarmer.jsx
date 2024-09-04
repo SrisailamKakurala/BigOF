@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
+import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
 const RegisterForm = () => {
     const [formData, setFormData] = useState({
         fullName: '',
-        phoneNumber: '',
+        mobileNumber: '',
         password: '',
         confirmPassword: '',
         address: '',
-        identification: '',
-        user: 'farmer'
+        aadharNumber: '',
     });
 
     const [errors, setErrors] = useState({});
@@ -20,7 +20,7 @@ const RegisterForm = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        if (name === 'phoneNumber' && !/^\d*$/.test(value)) {
+        if (name === 'mobileNumber' && !/^\d*$/.test(value)) {
             return; // Prevents non-numeric characters from being entered
         }
 
@@ -30,24 +30,25 @@ const RegisterForm = () => {
         });
     };
 
+
     const validateForm = () => {
         let formErrors = {};
 
         if (!formData.fullName) formErrors.fullName = "Full name is required.";
-        if (!formData.phoneNumber) formErrors.phoneNumber = "Phone number is required.";
-        if (!/^\d{10}$/.test(formData.phoneNumber)) formErrors.phoneNumber = "Phone number must be 10 digits.";
+        if (!formData.mobileNumber) formErrors.mobileNumber = "Phone number is required.";
+        if (!/^\d{10}$/.test(formData.mobileNumber)) formErrors.mobileNumber = "Phone number must be 10 digits.";
         if (!formData.password) formErrors.password = "Password is required.";
         if (formData.password !== formData.confirmPassword) {
             formErrors.confirmPassword = "Passwords do not match.";
         }
         if (!formData.address) formErrors.address = "Address is required.";
-        if (!formData.identification) formErrors.identification = "Identification is required.";
+        if (!formData.aadharNumber) formErrors.aadharNumber = "aadharNumber is required.";
 
         return formErrors;
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
+    const handleSubmit = async (e)=>{
+        e.preventDefault()
 
         const formErrors = validateForm();
         if (Object.keys(formErrors).length > 0) {
@@ -55,31 +56,23 @@ const RegisterForm = () => {
             return;
         }
 
-        // Store text fields in localStorage
-        localStorage.setItem('formData', JSON.stringify(formData));
-
-        setIsSubmitting(true);
-
-        try {
-            // Send axios GET request
-            await axios.get(`http://localhost:8000/api/v1/farmers/send-otp/${formData.phoneNumber}`);
-
-            // Navigate to OTP verification page
-            navigate('/verifyotp');
-        } catch (error) {
-            console.error("There was an error sending the OTP request:", error);
-            // Optionally handle error state here
-        } finally {
-            setIsSubmitting(false);
+        try{
+            const response = await axios.post("https://svgt9fcr-8000.inc1.devtunnels.ms/api/v1/farmers/register", formData)
+            const res = response.json()
+            if(res.status === 200) {
+                alert('asfkakjfahfkj')
+            }
+        }catch (err) {
+            console.log(err.message)
         }
-    };
+    }
+
+    
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-green-500 md:bg-[url('https://www.pngall.com/wp-content/uploads/6/Grass-Ground-PNG-Free-Image.png')] bg-cover">
             <form className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg overflow-y-scroll scrollbar-hide m-8" onSubmit={handleSubmit}>
-                <div className="mb-4 text-center">
-                    <h1 className="text-2xl font-bold mb-4">Register as Farmer</h1>
-                </div>
+                
                 <div className="mb-4">
                     <input
                         type="text"
@@ -95,14 +88,14 @@ const RegisterForm = () => {
                 <div className="mb-4">
                     <input
                         type="tel"
-                        name="phoneNumber"
+                        name="mobileNumber"
                         placeholder="Phone Number"
-                        className={`w-full p-4 text-sm border rounded-lg focus:outline-none ${errors.phoneNumber ? 'border-red-500 ring-red-400 ring-2' : 'border-gray-300 ring-green-400 ring-2'}`}
-                        value={formData.phoneNumber}
+                        className={`w-full p-4 text-sm border rounded-lg focus:outline-none ${errors.mobileNumber ? 'border-red-500 ring-red-400 ring-2' : 'border-gray-300 ring-green-400 ring-2'}`}
+                        value={formData.mobileNumber}
                         onChange={handleChange}
                         required
                     />
-                    {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
+                    {errors.mobileNumber && <p className="text-red-500 text-sm">{errors.mobileNumber}</p>}
                 </div>
                 <div className="mb-4">
                     <input
@@ -143,14 +136,14 @@ const RegisterForm = () => {
                 <div className="mb-6">
                     <input
                         type="text"
-                        name="identification"
+                        name="aadharNumber"
                         placeholder="Aadhaar, PAN card, etc."
-                        className={`w-full p-4 text-sm border rounded-lg focus:outline-none ${errors.identification ? 'border-red-500 ring-red-400 ring-2' : 'border-gray-300 ring-green-400 ring-2'}`}
-                        value={formData.identification}
+                        className={`w-full p-4 text-sm border rounded-lg focus:outline-none ${errors.aadharNumber ? 'border-red-500 ring-red-400 ring-2' : 'border-gray-300 ring-green-400 ring-2'}`}
+                        value={formData.aadharNumber}
                         onChange={handleChange}
                         required
                     />
-                    {errors.identification && <p className="text-red-500 text-sm">{errors.identification}</p>}
+                    {errors.aadharNumber && <p className="text-red-500 text-sm">{errors.aadharNumber}</p>}
                 </div>
                 <button
                     type="submit"
