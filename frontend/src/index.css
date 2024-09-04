@@ -2,9 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-*::selection{
+/* *::selection{
     color: green;
-}
+} */
 
 /* In your CSS file */
 .scrollbar-hide::-webkit-scrollbar {

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const RegisterBuyer = () => {
+const RegisterBuyer = ({ setIsAuthenticated }) => {
     const [formData, setFormData] = useState({
         fullName: '',
-        phoneNumber: '',
+        mobileNumber: '',
         password: '',
         confirmPassword: '',
         email: '',
@@ -19,8 +19,8 @@ const RegisterBuyer = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
 
-        // Ensure phoneNumber contains only numbers
-        if (name === 'phoneNumber') {
+        // Ensure mobileNumber contains only numbers
+        if (name === 'mobileNumber') {
             if (!/^\d*$/.test(value)) return; // Only update if value is numeric
         }
 
@@ -34,8 +34,8 @@ const RegisterBuyer = () => {
         let formErrors = {};
 
         if (!formData.fullName) formErrors.fullName = "Full name is required.";
-        if (!formData.phoneNumber) formErrors.phoneNumber = "Phone number is required.";
-        if (!/^\d{10}$/.test(formData.phoneNumber)) formErrors.phoneNumber = "Phone number must be 10 digits.";
+        if (!formData.mobileNumber) formErrors.mobileNumber = "Phone number is required.";
+        if (!/^\d{10}$/.test(formData.mobileNumber)) formErrors.mobileNumber = "Phone number must be 10 digits.";
         if (!formData.email) formErrors.email = "Email is required.";
         if (!formData.password) formErrors.password = "Password is required.";
         if (formData.password !== formData.confirmPassword) {
@@ -48,35 +48,31 @@ const RegisterBuyer = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         const formErrors = validateForm();
         if (Object.keys(formErrors).length > 0) {
             setErrors(formErrors);
             return;
         }
-
+    
         setIsSubmitting(true);
-
+    
         try {
-            const response = await axios.post('http://localhost:8000/api/v1/buyers/register', formData);
-            if (response.status === 201) {
-                // Handle successful registration, e.g., navigate to another page or show a success message
-                console.log('Registration successful:', response.data);
-                navigate('/success'); // Replace with your success page route
-            }
-        } catch (error) {
-            // Handle error response
-            if (error.response) {
-                console.error('Registration failed:', error.response.data);
-                setErrors({ server: error.response.data.message || 'Registration failed. Please try again.' });
+            const response = await axios.post("http://localhost:8000/api/v1/buyers/register", formData);
+            if (response.status === 200) {
+                localStorage.setItem('buyerDets', JSON.stringify(response.data));
+                localStorage.setItem('isAuthenticated', JSON.stringify(true));
+                navigate('/buyerDashboard');
             } else {
-                console.error('Error:', error.message);
-                setErrors({ server: 'An unexpected error occurred. Please try again later.' });
+                setErrors({ server: 'Something went wrong. Please try again.' });
             }
+        } catch (err) {
+            setErrors({ server: err.response?.data?.message || err.message });
         } finally {
             setIsSubmitting(false);
         }
     };
+    
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-green-500 py-5 px-5 md:bg-[url('https://www.pngall.com/wp-content/uploads/6/Grass-Ground-PNG-Free-Image.png')] bg-cover">
@@ -98,14 +94,14 @@ const RegisterBuyer = () => {
                 <div className="mb-4">
                     <input
                         type="tel"
-                        name="phoneNumber"
+                        name="mobileNumber"
                         placeholder="Phone Number"
-                        className={`w-full p-4 text-sm border rounded-lg focus:outline-none ${errors.phoneNumber ? 'border-red-500 ring-red-400 ring-2' : 'border-gray-300 ring-green-400 ring-2'}`}
-                        value={formData.phoneNumber}
+                        className={`w-full p-4 text-sm border rounded-lg focus:outline-none ${errors.mobileNumber ? 'border-red-500 ring-red-400 ring-2' : 'border-gray-300 ring-green-400 ring-2'}`}
+                        value={formData.mobileNumber}
                         onChange={handleChange}
                         required
                     />
-                    {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
+                    {errors.mobileNumber && <p className="text-red-500 text-sm">{errors.mobileNumber}</p>}
                 </div>
                 <div className="mb-4">
                     <input

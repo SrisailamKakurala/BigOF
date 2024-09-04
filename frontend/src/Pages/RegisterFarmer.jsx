@@ -3,7 +3,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 
-const RegisterForm = () => {
+const RegisterForm = ({ setIsAuthenticated }) => {
     const [formData, setFormData] = useState({
         fullName: '',
         mobileNumber: '',
@@ -56,14 +56,18 @@ const RegisterForm = () => {
             return;
         }
 
-        try{
-            const response = await axios.post("https://svgt9fcr-8000.inc1.devtunnels.ms/api/v1/farmers/register", formData)
-            const res = response.json()
-            if(res.status === 200) {
-                alert('asfkakjfahfkj')
+        try {
+            const response = await axios.post("http://localhost:8000/api/v1/farmers/register", formData);
+            // console.log(response.data)
+            if (response.status === 200) {
+                localStorage.setItem('isAuthenticated', JSON.stringify(true));
+                localStorage.setItem('farmerDets', JSON.stringify(response.data))
+                navigate('/farmerDashboard')
+            } else {
+                alert('Something went wrong. Please try again.');
             }
-        }catch (err) {
-            console.log(err.message)
+        } catch (err) {
+            console.log(err.message);
         }
     }
 

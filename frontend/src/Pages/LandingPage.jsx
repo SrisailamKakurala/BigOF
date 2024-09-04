@@ -1,5 +1,5 @@
 import React from "react";
-import Navbar from "../Components/landinPageComponents/Navbar";
+import Navbar from "../Components/landinPageComponents/Navbar_landingpage";
 import Logo from "../assets/images/logo.png";
 import Testimonials from "../Components/landinPageComponents/Testimonials";
 import Footer from "../Components/landinPageComponents/Footer";

@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import logo from '/src/assets/images/logo.png';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ dashboard }) => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [dashboard, setDashboard] = useState('farmerDashboard');
 
   return (
     <nav className="fixed top-0 left-0 w-full z-10 xl:px-20 lg:px-20 md:px-8 px-[1px] bg-white border-b border-gray-200 shadow-md rounded-b-md">
       <div className="mx-auto px-4 py-[2px] flex justify-between items-center">
         {/* Left Section: Logo */}
         <div className="text-xl font-bold text-gray-800">
-          <a href={'/'+dashboard} className="flex items-center md:text-4xl pt-1 text-xl">
+          <Link to='/' className="flex items-center md:text-4xl pt-1 text-xl">
             <img src={logo} alt="Logo" className="h-16 mr-2" />
             BigOF
-          </a>
+          </Link>
         </div>
 
         {/* Right Section: Search Icon and Links */}
@@ -40,14 +41,14 @@ const Navbar = ({ dashboard }) => {
                 <i className="fas fa-search"></i>
               </button>
             </Link>
-            <Link to="/" className="block text-green-500 hover:text-gray-800">
+            <Link to={'/'+dashboard} className="block text-green-500 hover:text-gray-800">
               Home
             </Link>
             <Link to="/marketplace" className="text-green-500 hover:text-gray-600 duration-200">
               Marketplace
             </Link>
             {/* Conditionally render Cart or Crop based on the dashboard prop */}
-            {dashboard === 'farmer' ? (
+            {dashboard === 'farmerDashboard' ? (
               <Link to="/addcrop" className="text-green-500 hover:text-gray-600 duration-200">
                 Sell Crop
               </Link>
@@ -80,7 +81,7 @@ const Navbar = ({ dashboard }) => {
               Marketplace
             </Link>
             {/* Conditionally render Cart or Crop based on the dashboard prop */}
-            {dashboard === 'farmer' ? (
+            {dashboard === 'farmerDashboard' ? (
               <Link to="/addcrop" className="block text-green-500 hover:text-gray-800">
                 Sell Crop
               </Link>
