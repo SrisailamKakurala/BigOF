@@ -25,6 +25,7 @@ const AuthenticatedRoutes = () => {
         <Route path='/mycontracts' element={<MyContracts />} />
         <Route path='/marketplace' element={<MarketPlace />} />
         <Route path='/search' element={<SearchPage/>} />
+        
       </Routes>
     </>
   );
