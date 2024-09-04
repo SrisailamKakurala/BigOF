@@ -11,11 +11,11 @@ const RegisterForm = () => {
         address: '',
         identification: '',
         profileImage: null,
+        user: 'farmer'
     });
 
     const [errors, setErrors] = useState({});
     const [isSubmitting, setIsSubmitting] = useState(false);
-
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -54,41 +54,24 @@ const RegisterForm = () => {
         return formErrors;
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        const formErrors = validateForm();
+        if (Object.keys(formErrors).length > 0) {
+            setErrors(formErrors);
+            return;
+        }
+
+        // Store text fields in localStorage
+        const { profileImage, ...textData } = formData;
+        localStorage.setItem('formData', JSON.stringify(textData));
+
+        // Store the profile image in memory
+        sessionStorage.setItem('profileImage', profileImage ? URL.createObjectURL(profileImage) : null);
+
+        // Navigate to OTP verification page
         navigate('/verifyotp');
-        // e.preventDefault();
-
-        // const formErrors = validateForm();
-        // if (Object.keys(formErrors).length > 0) {
-        //     setErrors(formErrors);
-        //     return;
-        // }
-
-        // setIsSubmitting(true);
-
-        // const formDataToSend = new FormData();
-        // Object.entries(formData).forEach(([key, value]) => {
-        //     formDataToSend.append(key, value);
-        // });
-
-        // try {
-        //     const response = await fetch('/api/send-otp', {
-        //         method: 'POST',
-        //         body: formDataToSend,
-        //     });
-
-        //     if (response.ok) {
-        //         const data = await response.json();
-        //         console.log('OTP sent successfully:', data);
-        //         navigate('/verifyotp', { state: { formData } });
-        //     } else {
-        //         console.error('Failed to send OTP');
-        //     }
-        // } catch (error) {
-        //     console.error('Error:', error);
-        // } finally {
-        //     setIsSubmitting(false);
-        // }
     };
 
     return (

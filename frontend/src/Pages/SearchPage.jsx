@@ -32,7 +32,7 @@ const SearchPage = () => {
     };
 
     return (
-        <div className="py-4 lg:px-20 md:px-8 px-3 w-[100vw]  h-[90vh] bg-[url('https://www.pngall.com/wp-content/uploads/6/Grass-Ground-PNG-Free-Image.png')] bg-cover">
+        <div className="py-4 mt-[75px] lg:px-20 md:px-8 px-3 w-full h-[90vh] bg-[url('https://www.pngall.com/wp-content/uploads/6/Grass-Ground-PNG-Free-Image.png')] bg-cover">
             <div className="mb-4 md:w-3/4 w-[90%] mx-auto">
                 <input
                     type="text"

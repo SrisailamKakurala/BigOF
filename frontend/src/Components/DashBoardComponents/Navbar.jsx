@@ -10,7 +10,7 @@ const Navbar = ({ dashboard }) => {
       <div className="mx-auto px-4 py-[2px] flex justify-between items-center">
         {/* Left Section: Logo */}
         <div className="text-xl font-bold text-gray-800">
-          <a href="/" className="flex items-center md:text-4xl pt-1 text-xl">
+          <a href={'/'+dashboard} className="flex items-center md:text-4xl pt-1 text-xl">
             <img src={logo} alt="Logo" className="h-16 mr-2" />
             BigOF
           </a>

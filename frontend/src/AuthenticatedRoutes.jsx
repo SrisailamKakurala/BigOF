@@ -1,6 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import BuyerDashBoard from './Pages/BuyerDashBoard';
+import FarmerDashBoard from './Pages/FarmerDashBoard';
 import AddCrop from './Pages/AddCrop';
 import Cart from './Pages/Cart';
 import DeliveryTracking from './Pages/DeliveryTracking';
@@ -15,9 +16,10 @@ const AuthenticatedRoutes = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar dashboard={'farmer'}/>
       <Routes>
-        <Route path='/' element={<BuyerDashBoard />} />
+        {/* <Route path='/' element={<BuyerDashBoard />} /> */}
+        <Route path='/' element={<FarmerDashBoard />} />
         <Route path='/addcrop' element={<AddCrop />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/deliverytracking' element={<DeliveryTracking />} />
