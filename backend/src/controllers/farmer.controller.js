@@ -243,9 +243,9 @@ const sendOtp = asyncHandler(async (req, res) => {
     // Sending SMS to the specified number
     try {
         const message = await client.messages.create({
-            body: Your OTP is: ${otp}, // Include the OTP in the message body
+            body: `Your OTP is: ${otp}`, // Include the OTP in the message body
             from: '+15403182347', // Use the correct Messaging Service SID
-            to: +91${mobileNumber}, // The recipient's phone number
+            to: `+91${mobileNumber}`, // The recipient's phone number
         });
 
         res.status(200).json({ success: true, message: 'OTP sent successfully!' });
