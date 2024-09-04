@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import '../index.css';
 
 const RegisterForm = () => {
@@ -54,7 +55,7 @@ const RegisterForm = () => {
         return formErrors;
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const formErrors = validateForm();
@@ -70,8 +71,20 @@ const RegisterForm = () => {
         // Store the profile image in memory
         sessionStorage.setItem('profileImage', profileImage ? URL.createObjectURL(profileImage) : null);
 
-        // Navigate to OTP verification page
-        navigate('/verifyotp');
+        setIsSubmitting(true);
+
+        try {
+            // Send axios GET request
+            await axios.get(`http://localhost:8000/api/v1/farmers/send-otp/${formData.phoneNumber}`);
+
+            // Navigate to OTP verification page
+            navigate('/verifyotp');
+        } catch (error) {
+            console.error("There was an error sending the OTP request:", error);
+            // Optionally handle error state here
+        } finally {
+            setIsSubmitting(false);
+        }
     };
 
     return (

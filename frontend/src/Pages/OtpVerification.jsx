@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const OTPVerification = () => {
     const [otp, setOtp] = useState(['', '', '', '']);
@@ -36,30 +37,28 @@ const OTPVerification = () => {
         e.preventDefault();
 
         const otpString = otp.join('');
+        const userData = localStorage.getItem('formData') ? JSON.parse(localStorage.getItem('formData')) : {};
+        const profileImage = sessionStorage.getItem('profilePicture');
+
+        // Extract required fields from userData
+        const { fullName, phoneNumber, password, address, identification: aadharNumber } = userData;
 
         try {
-            const response = await fetch('http://localhost:8000/api/v1/farmers/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ phoneNumber: location.state.formData.phoneNumber, otp: otpString }),
+            // Send OTP and profile image to backend
+            const response = await axios.post('http://localhost:8000/api/v1/farmers/register', {
+                fullName,
+                phoneNumber,
+                password,
+                address,
+                aadharNumber,
+                otp: otpString,
+                profileImage
             });
 
-            if (response.ok) {
-                const data = await response.json();
-                console.log('OTP verified successfully:', data);
+            if (response.status === 200) {
+                console.log('OTP verified successfully:', response.data);
 
-                // After verification, send form data to the backend
-                await fetch('/api/register', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(location.state.formData),
-                });
-
-                // Navigate to the success page
+                // After verification, navigate to the success page
                 navigate('/success');
             } else {
                 console.error('Failed to verify OTP');
