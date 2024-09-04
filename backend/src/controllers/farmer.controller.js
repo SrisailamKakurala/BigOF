@@ -28,7 +28,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 const registerFarmer = asyncHandler(async (req, res) => {
 
     const { fullName, mobileNumber, password, address, aadharNumber } = req.body
-    console.log(fullName, mobileNumber);
+    console.log(fullName, mobileNumber, password, address, aadharNumber);
 
     if ([fullName, mobileNumber, password, address, aadharNumber].some((field) => field?.trim() === '')) {
         throw new ApiError(400, 'All Fields are required')
@@ -40,19 +40,6 @@ const registerFarmer = asyncHandler(async (req, res) => {
         throw new ApiError(409, 'User already exists')
     }
 
-    console.log(req.file)
-
-    const profilePictureLocalPath = req.file?.path;
-
-    if (!profilePictureLocalPath) {
-        throw new ApiError(400, 'Profile picture is required')
-    }
-
-    const profile = await uploadOnCloudinary(profilePictureLocalPath)
-
-    if (!profile) {
-        throw new ApiError(400, 'Profile picture is required')
-    }
 
     const Farmer = await farmerModel.create({
         fullName,
@@ -60,7 +47,6 @@ const registerFarmer = asyncHandler(async (req, res) => {
         password,
         address,
         aadharNumber,
-        profilePicture: profile?.url || '',
     })
 
     const createdFarmer = await farmerModel.findById(Farmer._id).select(
