@@ -38,7 +38,7 @@ const OTPVerification = () => {
         const otpString = otp.join('');
 
         try {
-            const response = await fetch('/api/verify-otp', {
+            const response = await fetch('http://localhost:8000/api/v1/farmers/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
