@@ -1,5 +1,5 @@
 const Router = require('express');
-const { registerFarmer, loginFarmer, logoutFarmer, refreshAccessToken, changeCurrentPassword, getCurrentUser } = require('../controllers/farmer.controller');
+const { registerFarmer, loginFarmer, logoutFarmer, refreshAccessToken, changeCurrentPassword, getCurrentUser, sendOtp } = require('../controllers/farmer.controller');
 const router = Router();
 const upload = require('../middlewares/multer.middleware');
 const verifyJWT_farmer = require('../middlewares/auth_farmer.middleware');
@@ -22,6 +22,7 @@ router.route('/logout').post(
 router.route('/refresh-token').post(refreshAccessToken)
 router.route('/change-password').post(changeCurrentPassword)
 router.route('/get-user').get(getCurrentUser)
+router.route('/send-otp/:mobileNumber').get(sendOtp)
 
 
 module.exports = router;

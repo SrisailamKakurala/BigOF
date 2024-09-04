@@ -6,7 +6,7 @@ const session = require('express-session')
 const app = express()
 
 app.use(cors({
-    origin: process.env.CORS_ORIGIN,
+    // origin: process.env.CORS_ORIGIN,
     credentials: true    
 }))
 app.use(express.json()) // parsing the data to json
