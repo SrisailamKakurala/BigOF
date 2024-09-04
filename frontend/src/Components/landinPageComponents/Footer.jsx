@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 const Footer = () => {
     return (
@@ -9,85 +9,77 @@ const Footer = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" className="w-10 h-10 text-white p-2 bg-green-500 rounded-full" viewBox="0 0 24 24">
                             <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
                         </svg>
-                        <span className="ml-3 text-xl">Tailblocks</span>
+                        <span className="ml-3 text-xl">Kisaan Sathi</span>
                     </a>
-                    <p className="mt-2 text-sm text-gray-500">Air plant banjo lyft occupy retro adaptogen indego</p>
+                    <p className="mt-2 text-sm text-gray-500">Empowering farmers with tools and resources to thrive. Bridging the gap between producers and buyers.</p>
                 </div>
                 <div className="flex-grow flex flex-wrap md:pl-20 -mb-10 md:mt-0 mt-10 md:text-left text-center">
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">QUICK LINKS</h2>
                         <nav className="list-none mb-10">
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">First Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">Home</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">About Us</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">Services</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">Contact Us</a>
                             </li>
                         </nav>
                     </div>
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">FARMING RESOURCES</h2>
                         <nav className="list-none mb-10">
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">First Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">Farming Tips</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">Market Prices</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">Grants & Subsidies</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">Events & Workshops</a>
                             </li>
                         </nav>
                     </div>
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
+                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">SUPPORT</h2>
                         <nav className="list-none mb-10">
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">First Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">FAQ</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">Customer Support</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">Technical Assistance</a>
                             </li>
                             <li>
-                                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
+                                <a className="text-gray-600 hover:text-gray-800">Feedback</a>
                             </li>
                         </nav>
                     </div>
                     <div className="lg:w-1/4 md:w-1/2 w-full px-4">
-                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CATEGORIES</h2>
-                        <nav className="list-none mb-10">
-                            <li>
-                                <a className="text-gray-600 hover:text-gray-800">First Link</a>
-                            </li>
-                            <li>
-                                <a className="text-gray-600 hover:text-gray-800">Second Link</a>
-                            </li>
-                            <li>
-                                <a className="text-gray-600 hover:text-gray-800">Third Link</a>
-                            </li>
-                            <li>
-                                <a className="text-gray-600 hover:text-gray-800">Fourth Link</a>
-                            </li>
-                        </nav>
+                        <h2 className="title-font font-medium text-gray-900 tracking-widest text-sm mb-3">CONTACT US</h2>
+                        <div className="text-gray-600">
+                            <p className="mb-2">123 Farm Lane</p>
+                            <p className="mb-2">City, State, 12345</p>
+                            <p className="mb-2">Email: support@kisaansathi.com</p>
+                            <p className="mb-2">Phone: +91-123-456-7890</p>
+                        </div>
                     </div>
                 </div>
             </div>
             <div className="bg-gray-100">
                 <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-                    <p className="text-gray-500 text-sm text-center sm:text-left">© 2020 Tailblocks —
-                        <a href="https://twitter.com/knyttneve" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">@knyttneve</a>
+                    <p className="text-gray-500 text-sm text-center sm:text-left">© {new Date().getFullYear()} Kisaan Sathi —
+                        <a href="https://twitter.com/kisaansathi" rel="noopener noreferrer" className="text-gray-600 ml-1" target="_blank">@kisaansathi</a>
                     </p>
                     <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
                         <a className="text-gray-500">
@@ -116,7 +108,7 @@ const Footer = () => {
                 </div>
             </div>
         </footer>
-    )
+    );
 }
 
-export default Footer
+export default Footer;
