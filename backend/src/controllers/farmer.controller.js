@@ -28,7 +28,7 @@ const generateAccessAndRefreshToken = async (userId) => {
 const registerFarmer = asyncHandler(async (req, res) => {
 
     const { fullName, mobileNumber, password, address, aadharNumber } = req.body
-    console.log(fullName, mobileNumber, password, address, aadharNumber);
+    // console.log(fullName, mobileNumber, password, address, aadharNumber);
 
     if ([fullName, mobileNumber, password, address, aadharNumber].some((field) => field?.trim() === '')) {
         throw new ApiError(400, 'All Fields are required')

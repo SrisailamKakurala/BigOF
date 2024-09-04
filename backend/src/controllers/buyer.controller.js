@@ -33,8 +33,10 @@ const registerBuyer = asyncHandler( async (req, res) => {
     // check for user creation
     // return response
 
+    console.log("Request body:", req.body);
+
     const { fullName, mobileNumber, password, address, email } = req.body
-    console.log(fullName, mobileNumber); 
+    console.log(fullName, mobileNumber, password, address, email); 
 
     if([fullName, mobileNumber, password, address, email].some((field) => field?.trim() === '')){
         throw new ApiError(400, 'All Fields are required')
@@ -46,27 +48,12 @@ const registerBuyer = asyncHandler( async (req, res) => {
         throw new ApiError(409, 'User already exists')
     }
 
-    console.log(req.file)
-
-    const profilePictureLocalPath = req.file?.path;
-
-    if(!profilePictureLocalPath){
-        throw new ApiError(400, 'Profile picture is required')
-    }
-
-    const profile = await uploadOnCloudinary(profilePictureLocalPath)
-
-    if(!profile){
-        throw new ApiError(400, 'Profile picture is required')
-    }
-
     const Buyer = await buyerModel.create({
         fullName,
         mobileNumber,
         password,
         address,
         email,
-        profilePicture: profile?.url || '',
     })
 
     const createdBuyer = await buyerModel.findById(Buyer._id).select(
