@@ -36,36 +36,7 @@ const OTPVerification = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        const otpString = otp.join('');
-        const userData = localStorage.getItem('formData') ? JSON.parse(localStorage.getItem('formData')) : {};
-        const profileImage = sessionStorage.getItem('profilePicture');
-
-        // Extract required fields from userData
-        const { fullName, phoneNumber, password, address, identification: aadharNumber } = userData;
-
-        try {
-            // Send OTP and profile image to backend
-            const response = await axios.post('http://localhost:8000/api/v1/farmers/register', {
-                fullName,
-                phoneNumber,
-                password,
-                address,
-                aadharNumber,
-                otp: otpString,
-                profileImage
-            });
-
-            if (response.status === 200) {
-                console.log('OTP verified successfully:', response.data);
-
-                // After verification, navigate to the success page
-                navigate('/success');
-            } else {
-                console.error('Failed to verify OTP');
-            }
-        } catch (error) {
-            console.error('Error:', error);
-        }
+    
     };
 
     return (

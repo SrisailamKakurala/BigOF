@@ -9,7 +9,6 @@ const RegisterBuyer = () => {
         confirmPassword: '',
         email: '',
         address: '',
-        profileImage: null,
     });
 
     const [errors, setErrors] = useState({});
@@ -31,12 +30,6 @@ const RegisterBuyer = () => {
         });
     };
 
-    const handleImageChange = (e) => {
-        setFormData({
-            ...formData,
-            profileImage: e.target.files[0],
-        });
-    };
 
     const validateForm = () => {
         let formErrors = {};
@@ -53,72 +46,10 @@ const RegisterBuyer = () => {
         return formErrors;
     };
 
-    const handleSubmit = async (e) => {
-        navigate('/verifyotp');
-        // e.preventDefault();
-
-        // const formErrors = validateForm();
-        // if (Object.keys(formErrors).length > 0) {
-        //     setErrors(formErrors);
-        //     return;
-        // }
-
-        // setIsSubmitting(true);
-
-        // const formDataToSend = new FormData();
-        // Object.entries(formData).forEach(([key, value]) => {
-        //     formDataToSend.append(key, value);
-        // });
-
-        // try {
-        //     const response = await fetch('/api/send-otp', {
-        //         method: 'POST',
-        //         body: formDataToSend,
-        //     });
-
-        //     if (response.ok) {
-        //         const data = await response.json();
-        //         console.log('OTP sent successfully:', data);
-        //         navigate('/verify', { state: { formData } });
-        //     } else {
-        //         console.error('Failed to send OTP');
-        //         navigate('/verifyotp', { state: { formData } });
-        //     }
-        // } catch (error) {
-        //     console.error('Error:', error);
-        // } finally {
-        //     setIsSubmitting(false);
-        // }
-    };
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-green-500 py-5 px-5 md:bg-[url('https://www.pngall.com/wp-content/uploads/6/Grass-Ground-PNG-Free-Image.png')] bg-cover">
             <form className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg" onSubmit={handleSubmit}>
-                <div className="mb-4 text-center">
-                    <input
-                        type="file"
-                        name="profileImage"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        className="hidden"
-                        id="profileImage"
-                    />
-                    <label htmlFor="profileImage" className="cursor-pointer">
-                        <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
-                            {formData.profileImage ? (
-                                <img
-                                    src={URL.createObjectURL(formData.profileImage)}
-                                    alt="Profile Preview"
-                                    className="object-cover w-full h-full"
-                                />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center text-gray-400 p-4">
-                                    <span>Select Profile Image</span>
-                                </div>
-                            )}
-                        </div>
-                    </label>
-                </div>
 
                 <div className="mb-4">
                     <input

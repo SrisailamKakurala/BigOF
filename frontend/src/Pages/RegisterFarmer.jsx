@@ -11,7 +11,6 @@ const RegisterForm = () => {
         confirmPassword: '',
         address: '',
         identification: '',
-        profileImage: null,
         user: 'farmer'
     });
 
@@ -32,12 +31,6 @@ const RegisterForm = () => {
         });
     };
 
-    const handleImageChange = (e) => {
-        setFormData({
-            ...formData,
-            profileImage: e.target.files[0],
-        });
-    };
 
     const validateForm = () => {
         let formErrors = {};
@@ -55,66 +48,12 @@ const RegisterForm = () => {
         return formErrors;
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const formErrors = validateForm();
-        if (Object.keys(formErrors).length > 0) {
-            setErrors(formErrors);
-            return;
-        }
-
-        // Store text fields in localStorage
-        const { profileImage, ...textData } = formData;
-        localStorage.setItem('formData', JSON.stringify(textData));
-
-        // Store the profile image in memory
-        sessionStorage.setItem('profileImage', profileImage ? URL.createObjectURL(profileImage) : null);
-
-        setIsSubmitting(true);
-
-        try {
-            // Send axios GET request
-            await axios.get(`http://localhost:8000/api/v1/farmers/send-otp/${formData.phoneNumber}`);
-
-            // Navigate to OTP verification page
-            navigate('/verifyotp');
-        } catch (error) {
-            console.error("There was an error sending the OTP request:", error);
-            // Optionally handle error state here
-        } finally {
-            setIsSubmitting(false);
-        }
-    };
+    
 
     return (
         <div className="min-h-screen flex items-center justify-center bg-green-500 md:bg-[url('https://www.pngall.com/wp-content/uploads/6/Grass-Ground-PNG-Free-Image.png')] bg-cover">
             <form className="w-full max-w-md bg-white p-8 rounded-lg shadow-lg overflow-y-scroll scrollbar-hide m-8" onSubmit={handleSubmit}>
-                <div className="mb-4 text-center">
-                    <input
-                        type="file"
-                        name="profileImage"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        className="hidden"
-                        id="profileImage"
-                    />
-                    <label htmlFor="profileImage" className="cursor-pointer">
-                        <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
-                            {formData.profileImage ? (
-                                <img
-                                    src={URL.createObjectURL(formData.profileImage)}
-                                    alt="Profile Preview"
-                                    className="object-cover w-full h-full"
-                                />
-                            ) : (
-                                <div className="w-full h-full flex items-center justify-center p-5 text-gray-400">
-                                    <span>Select Profile Image</span>
-                                </div>
-                            )}
-                        </div>
-                    </label>
-                </div>
+                
                 <div className="mb-4">
                     <input
                         type="text"
