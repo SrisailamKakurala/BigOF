@@ -2,7 +2,7 @@ import React from 'react'
 
 const MyContracts = () => {
   return (
-    <div>MyContracts
+    <div  className='mt-20'>MyContracts
       sadfaf
       af
       a
