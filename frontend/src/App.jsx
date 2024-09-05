@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import LandingPage from './Pages/LandingPage';
 import RegisterPage1 from './Pages/RegisterPage1';
@@ -7,10 +7,10 @@ import RegisterBuyer from './Pages/RegisterBuyer';
 import RegisterFarmer from './Pages/RegisterFarmer';
 import OTPVerification from './Pages/OtpVerification';
 import AuthenticatedRoutes from './AuthenticatedRoutes'
+import { AuthContext } from './Contexts/AuthContext';
 
 const App = () => {
-  // Retrieve authentication status from localStorage
-  const [isAuthenticated, setIsAuthenticated] = useState(true);
+  const { isAuthenticated } = useContext(AuthContext);
 
   return (
     <>
@@ -31,7 +31,7 @@ const App = () => {
           </>
         )}
       </Router>
-    </>
+    </ >
   );
 };
 

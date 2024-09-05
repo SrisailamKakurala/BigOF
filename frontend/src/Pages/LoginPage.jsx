@@ -1,14 +1,30 @@
 import logo from '../assets/images/logo.png';
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useContext, useEffect } from 'react';
+import { AuthContext } from '../Contexts/AuthContext';
+import axios from 'axios';
+import Cookies from 'js-cookie';
+
 
 const LoginPage = () => {
+    const { setIsAuthenticated } = useContext(AuthContext);
+
     const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [mobile, setMobile] = useState('');
     const [error, setError] = useState('');
     const [mobileError, setMobileError] = useState('');
+
+    useEffect(() => {
+        const accessToken = Cookies.get('accessToken');
+        console.log('accessToken: ' + accessToken)
+        const farmerDets = localStorage.getItem('farmerDets');
+        if (farmerDets || accessToken) {
+          setIsAuthenticated(true); // Set to true if user details exist
+        }
+      }, []);
+
 
     const validateMobile = () => {
         const mobileRegex = /^[6-9]\d{9}$/;
@@ -39,20 +55,23 @@ const LoginPage = () => {
         }
 
         console.log({ username, password, mobile });
-        // try {
-        //     const response = await axios.post('http://localhost:3000/login', { username, password, mobile });
-        //     if (response.data) {
-        //         localStorage.setItem('userData', JSON.stringify(response.data.user));
-        //         navigate('/home');
-        //     } else {
-            //         setError('Invalid credentials. Please try again.');
-            //         console.log('Error: Invalid credentials.');
-            //     }
-            // } catch (err) {
-                //     setError('An error occurred during login. Please try again.');
-                //     console.log('Error:', err);
-                // }
-                        navigate('/verifyotp');
+        const accessToken = Cookies.get('accessToken');
+        console.log('accessToken: ' + accessToken)
+        try {
+            const response = await axios.post('http://localhost:8000/api/v1/farmers/login', { fullName: username, password, mobileNumber: mobile });
+            if (response.data) {
+                localStorage.setItem('userData', JSON.stringify(response.data.user));
+                setIsAuthenticated(true);
+                // navigate('/home');
+            } else {
+                setError('Invalid credentials. Please try again.');
+                console.log('Error: Invalid credentials.');
+            }
+        } catch (err) {
+            setError('An error occurred during login. Please try again.');
+            console.log('Error:', err);
+        }
+        // navigate('/verifyotp');
     };
 
     const handleForgotPassword = () => {

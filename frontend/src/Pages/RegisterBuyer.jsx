@@ -61,7 +61,7 @@ const RegisterBuyer = ({ setIsAuthenticated }) => {
             const response = await axios.post("http://localhost:8000/api/v1/buyers/register", formData);
             if (response.status === 200) {
                 localStorage.setItem('buyerDets', JSON.stringify(response.data));
-                localStorage.setItem('isAuthenticated', JSON.stringify(true));
+                // have to set is authenticated to true
                 navigate('/buyerDashboard');
             } else {
                 setErrors({ server: 'Something went wrong. Please try again.' });

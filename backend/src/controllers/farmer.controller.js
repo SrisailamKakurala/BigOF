@@ -66,7 +66,9 @@ const registerFarmer = asyncHandler(async (req, res) => {
 
 const loginFarmer = asyncHandler(async (req, res) => {
 
+    
     const { fullName, password, mobileNumber } = req.body
+    console.log({ fullName, password, mobileNumber })
 
     if (!(fullName || password || mobileNumber)) {
         throw new ApiError(400, 'All fields are required')
@@ -88,6 +90,7 @@ const loginFarmer = asyncHandler(async (req, res) => {
 
     const options = {
         httpOnly: true,
+        secure: process.env.NODE_ENV === 'production' || false,
         secure: true,
     }
 

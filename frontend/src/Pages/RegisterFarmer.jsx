@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
+import { AuthContext } from '../Contexts/AuthContext';
 
-const RegisterForm = ({ setIsAuthenticated }) => {
+const RegisterForm = () => {
+    const { setIsAuthenticated } = useContext(AuthContext);
+
+
     const [formData, setFormData] = useState({
         fullName: '',
         mobileNumber: '',
@@ -60,9 +64,10 @@ const RegisterForm = ({ setIsAuthenticated }) => {
             const response = await axios.post("http://localhost:8000/api/v1/farmers/register", formData);
             // console.log(response.data)
             if (response.status === 200) {
-                localStorage.setItem('isAuthenticated', JSON.stringify(true));
+                // localStorage.setItem('isAuthenticated', JSON.stringify(true));
                 localStorage.setItem('farmerDets', JSON.stringify(response.data))
-                navigate('/farmerDashboard')
+                setIsAuthenticated(true)
+                navigate('/')
             } else {
                 alert('Something went wrong. Please try again.');
             }
