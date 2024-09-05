@@ -1,10 +1,10 @@
-import React, {useContext} from 'react'
+import React, {useContext, useEffect} from 'react'
 import Cookies from 'js-cookie';
 import { AuthContext } from '../Contexts/AuthContext';
 
 const farmerDashBoard = () => {
 
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { setIsAuthenticated, setLoading } = useContext(AuthContext);
 
   useEffect(() => {
     const accessToken = Cookies.get('accessToken');
@@ -16,7 +16,7 @@ const farmerDashBoard = () => {
   }, []);
 
   return (
-    <div>farmerDashBoard</div>
+    <div className='bg-black w-[100vw] h-screen'>farmerDashBoard</div>
   )
 }
 

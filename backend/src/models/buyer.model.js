@@ -53,11 +53,15 @@ buyerSchema.pre("save", async function (next) {
 })
 
 buyerSchema.methods.isPasswordCorrect = async function(password) {
-    return await bcrypt.compare(password, this.password)
+    try {
+        return await bcrypt.compare(password, this.password);
+    } catch (error) {
+        throw new Error('Password comparison failed');
+    }
 }
 
 buyerSchema.methods.generateAccessToken = function() {
-    jwt.sign(
+    return jwt.sign(
         {
             _id: this._id,
             email: this.email,
@@ -71,7 +75,7 @@ buyerSchema.methods.generateAccessToken = function() {
 }
 
 buyerSchema.methods.generateRefreshToken = function() {
-    jwt.sign(
+    return jwt.sign(
         {
             _id: this._id,
         },

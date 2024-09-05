@@ -18,12 +18,11 @@ const LoginPage = () => {
 
     useEffect(() => {
         const accessToken = Cookies.get('accessToken');
-        console.log('accessToken: ' + accessToken)
         const farmerDets = localStorage.getItem('farmerDets');
         if (farmerDets || accessToken) {
-          setIsAuthenticated(true); // Set to true if user details exist
+            setIsAuthenticated(true); 
         }
-      }, []);
+    }, []);
 
 
     const validateMobile = () => {
@@ -54,15 +53,21 @@ const LoginPage = () => {
             return;
         }
 
-        console.log({ username, password, mobile });
-        const accessToken = Cookies.get('accessToken');
-        console.log('accessToken: ' + accessToken)
+        // console.log({ username, password, mobile });
         try {
             const response = await axios.post('http://localhost:8000/api/v1/farmers/login', { fullName: username, password, mobileNumber: mobile });
             if (response.data) {
-                localStorage.setItem('userData', JSON.stringify(response.data.user));
+                // console.log(response.data);
+                // localStorage.setItem('userData', JSON.stringify(response.data.data.user));
+
+                // Set the tokens in cookies
+                const { accessToken, refreshToken } = response.data.data;
+                Cookies.set('accessToken', accessToken, { expires: 1 / 24 });
+                Cookies.set('refreshToken', refreshToken, { expires: 7 });
+
+                // console.log('accessToken: ' + accessToken);
                 setIsAuthenticated(true);
-                // navigate('/home');
+                navigate('/')
             } else {
                 setError('Invalid credentials. Please try again.');
                 console.log('Error: Invalid credentials.');

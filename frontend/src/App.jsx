@@ -8,9 +8,14 @@ import RegisterFarmer from './Pages/RegisterFarmer';
 import OTPVerification from './Pages/OtpVerification';
 import AuthenticatedRoutes from './AuthenticatedRoutes'
 import { AuthContext } from './Contexts/AuthContext';
+import Loader from './utils/Loader';
 
 const App = () => {
-  const { isAuthenticated } = useContext(AuthContext);
+  const { isAuthenticated, loading } = useContext(AuthContext);
+
+  if (loading) {
+    return <Loader />
+  }
 
   return (
     <>
@@ -26,7 +31,7 @@ const App = () => {
               <Route path='/register_farmer' element={<RegisterFarmer />} />
               <Route path='/register_buyer' element={<RegisterBuyer />} />
               <Route path='/verifyotp' element={<OTPVerification />} />
-              
+
             </Routes>
           </>
         )}

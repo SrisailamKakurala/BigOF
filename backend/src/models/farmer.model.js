@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const mongooseAggregatePaginate = require('mongoose-aggregate-paginate-v2');
-const bcrypt = require('bcrypt')
-const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 const farmerSchema = new mongoose.Schema({
     fullName: {
@@ -46,20 +46,28 @@ const farmerSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-}, { timestamps: true })
+}, { timestamps: true });
 
 farmerSchema.pre("save", async function (next) {
-    if(!this.isModified("password")) next()
-    this.password = await bcrypt.hash(this.password, 10)
-    next()
-})
+    if (!this.isModified("password")) return next();
+    try {
+        this.password = await bcrypt.hash(this.password, 10);
+        next();
+    } catch (error) {
+        next(error);
+    }
+});
 
 farmerSchema.methods.isPasswordCorrect = async function(password) {
-    return await bcrypt.compare(password, this.password)
-}
+    try {
+        return await bcrypt.compare(password, this.password);
+    } catch (error) {
+        throw new Error('Password comparison failed');
+    }
+};
 
 farmerSchema.methods.generateAccessToken = function() {
-    jwt.sign(
+    return jwt.sign(
         {
             _id: this._id,
             aadharNumber: this.aadharNumber,
@@ -69,11 +77,11 @@ farmerSchema.methods.generateAccessToken = function() {
         {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY
         }
-    )
-}
+    );
+};
 
 farmerSchema.methods.generateRefreshToken = function() {
-    jwt.sign(
+    return jwt.sign(
         {
             _id: this._id,
         },
@@ -81,10 +89,10 @@ farmerSchema.methods.generateRefreshToken = function() {
         {
             expiresIn: process.env.REFRESH_TOKEN_EXPIRY
         }
-    )
-}
+    );
+};
 
-farmerSchema.plugin(mongooseAggregatePaginate)
+farmerSchema.plugin(mongooseAggregatePaginate);
 
-const farmerModel = mongoose.model("Farmer", farmerSchema)
-module.exports = farmerModel
+const farmerModel = mongoose.model("Farmer", farmerSchema);
+module.exports = farmerModel;

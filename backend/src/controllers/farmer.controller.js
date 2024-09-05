@@ -11,6 +11,8 @@ const generateAccessAndRefreshToken = async (userId) => {
         const accessToken = farmer.generateAccessToken()
         const refreshToken = farmer.generateRefreshToken()
 
+        // console.log(accessToken, refreshToken)
+
         farmer.refreshToken = refreshToken
         await farmer.save({ validateBeforeSave: false })
 
@@ -86,18 +88,14 @@ const loginFarmer = asyncHandler(async (req, res) => {
         throw new ApiError(400, 'incorrect password')
     }
 
+    // console.log(farmer._id)
+
     const { accessToken, refreshToken } = await generateAccessAndRefreshToken(farmer._id)
 
-    const options = {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === 'production' || false,
-        secure: true,
-    }
+    // console.log({ accessToken, refreshToken })
 
     return res
         .status(200)
-        .cookie('accessToken', accessToken, options)
-        .cookie('refreshToken', refreshToken, options)
         .json(
             new ApiResponse(
                 200,
