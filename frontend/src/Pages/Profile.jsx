@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const Profile = ({ isOwner }) => {
   // Mock data for contracts with farmer details

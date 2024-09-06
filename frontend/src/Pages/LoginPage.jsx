@@ -58,7 +58,7 @@ const LoginPage = () => {
             const response = await axios.post('http://localhost:8000/api/v1/farmers/login', { fullName: username, password, mobileNumber: mobile });
             if (response.data) {
                 // console.log(response.data);
-                // localStorage.setItem('userData', JSON.stringify(response.data.data.user));
+                localStorage.setItem('userData', JSON.stringify(response.data.data.user));
 
                 // Set the tokens in cookies
                 const { accessToken, refreshToken } = response.data.data;
