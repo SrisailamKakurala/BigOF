@@ -55,7 +55,9 @@ const LoginPage = () => {
 
         // console.log({ username, password, mobile });
         try {
-            const response = await axios.post('http://localhost:8000/api/v1/farmers/login', { fullName: username, password, mobileNumber: mobile });
+            const response = JSON.stringify(localStorage.getItem('userData')).user == 'farmer' ? 
+            await axios.post('http://localhost:8000/api/v1/farmers/login', { fullName: username, password, mobileNumber: mobile }) :
+            await axios.post('http://localhost:8000/api/v1/buyers/login', { fullName: username, password, mobileNumber: mobile });
             if (response.data) {
                 // console.log(response.data);
                 localStorage.setItem('userData', JSON.stringify(response.data.data.user));

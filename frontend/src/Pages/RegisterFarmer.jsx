@@ -65,7 +65,7 @@ const RegisterForm = () => {
             // console.log(response.data)
             if (response.status === 200) {
                 // localStorage.setItem('isAuthenticated', JSON.stringify(true));
-                localStorage.setItem('farmerDets', JSON.stringify(response.data))
+                localStorage.setItem('userData', JSON.stringify(response.data.data))
                 setIsAuthenticated(true)
                 navigate('/')
             } else {

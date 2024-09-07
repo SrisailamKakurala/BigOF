@@ -2,9 +2,8 @@ import React, { useEffect, useState } from 'react';
 import logo from '/src/assets/images/logo.png';
 import { Link } from 'react-router-dom';
 
-const Navbar = () => {
+const Navbar = ({user}) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [dashboard, setDashboard] = useState('farmerDashboard');
 
   return (
     <nav className="fixed top-0 left-0 w-full z-10 xl:px-20 lg:px-20 md:px-8 px-[1px] bg-white border-b border-gray-200 shadow-md rounded-b-md">
@@ -41,14 +40,14 @@ const Navbar = () => {
                 <i className="fas fa-search"></i>
               </button>
             </Link>
-            <Link to={'/'+dashboard} className="block text-green-500 hover:text-gray-800">
+            <Link to='/' className="block text-green-500 hover:text-gray-800">
               Home
             </Link>
             <Link to="/marketplace" className="text-green-500 hover:text-gray-600 duration-200">
               Marketplace
             </Link>
             {/* Conditionally render Cart or Crop based on the dashboard prop */}
-            {dashboard === 'farmerDashboard' ? (
+            {user == 'farmer' ? (
               <Link to="/addcrop" className="text-green-500 hover:text-gray-600 duration-200">
                 Sell Crop
               </Link>
@@ -81,7 +80,7 @@ const Navbar = () => {
               Marketplace
             </Link>
             {/* Conditionally render Cart or Crop based on the dashboard prop */}
-            {dashboard === 'farmerDashboard' ? (
+            {user == 'farmer' ? (
               <Link to="/addcrop" className="block text-green-500 hover:text-gray-800">
                 Sell Crop
               </Link>

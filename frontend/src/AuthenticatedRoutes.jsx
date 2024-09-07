@@ -13,12 +13,19 @@ import Marketplace from './Pages/MarketPlace';
 
 const AuthenticatedRoutes = () => {
 
+  const user = JSON.stringify(localStorage.getItem('userData')).user
+
   return (
     <>
-      <Navbar dashboard={'farmer'}/>
+      <Navbar dashboard={user}/>
       <Routes>
-        <Route path='/' element={<FarmerDashBoard  />} />
-        <Route path='/buyerDashboard' element={<BuyerDashBoard  />} />
+        {
+          user == 'farmer'?
+          <Route path='/' element={<FarmerDashBoard  />} /> :
+          <Route path='/' element={<BuyerDashBoard  />} />
+        } 
+        {/* <Route path='/' element={<FarmerDashBoard  />} />
+        <Route path='/buyerDashboard' element={<BuyerDashBoard  />} /> */}
         <Route path='/addcrop' element={<AddCrop />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/deliverytracking' element={<DeliveryTracking />} />

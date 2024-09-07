@@ -46,6 +46,10 @@ const farmerSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    user: {
+        type: String,
+        default: 'farmer'
+    }
 }, { timestamps: true });
 
 farmerSchema.pre("save", async function (next) {

@@ -44,6 +44,10 @@ const buyerSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
+    user: {
+        type: String,
+        default: 'buyer'
+    }
 }, { timestamps: true });
 
 buyerSchema.pre("save", async function (next) {

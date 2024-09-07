@@ -9,8 +9,8 @@ const farmerDashBoard = () => {
   useEffect(() => {
     const accessToken = Cookies.get('accessToken');
     console.log('accessToken: ' + accessToken)
-    const farmerDets = localStorage.getItem('farmerDets');
-    if (farmerDets || accessToken) {
+    const userData = localStorage.getItem('userData');
+    if (userData || accessToken) {
       setIsAuthenticated(true); // Set to true if user details exist
     }
   }, []);

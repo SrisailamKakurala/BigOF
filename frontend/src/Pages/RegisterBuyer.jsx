@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../Contexts/AuthContext';
 
-const RegisterBuyer = ({ setIsAuthenticated }) => {
+const RegisterBuyer = () => {
+    const { setIsAuthenticated } = useContext(AuthContext);
     const [formData, setFormData] = useState({
         fullName: '',
         mobileNumber: '',
@@ -60,9 +62,9 @@ const RegisterBuyer = ({ setIsAuthenticated }) => {
         try {
             const response = await axios.post("http://localhost:8000/api/v1/buyers/register", formData);
             if (response.status === 200) {
-                localStorage.setItem('buyerDets', JSON.stringify(response.data));
-                // have to set is authenticated to true
-                navigate('/buyerDashboard');
+                localStorage.setItem('userData', JSON.stringify(response.data.data));
+                setIsAuthenticated(true)
+                navigate('/');
             } else {
                 setErrors({ server: 'Something went wrong. Please try again.' });
             }

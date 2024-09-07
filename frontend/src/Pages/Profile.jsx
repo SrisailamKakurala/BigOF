@@ -1,13 +1,26 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import Cookies from 'js-cookie';
+import { AuthContext } from '../Contexts/AuthContext';
 
 const Profile = ({ isOwner }) => {
 
+  const { setIsAuthenticated, setLoading } = useContext(AuthContext);
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    const userData = localStorage.getItem("userData");
+    const accessToken = Cookies.get('accessToken');
+    console.log('accessToken: ' + accessToken)
+    const userData = localStorage.getItem('userData');
+    if (userData || accessToken) {
+      setUser(userData);
+      setIsAuthenticated(true); // Set to true if user details exist
+    }
+  }, []);
+
+  useEffect(() => {
+    const userData = JSON.parse(localStorage.getItem("userData"));
     if (userData) {
-      setUser(JSON.parse(userData));
+      setUser(userData);
     }
   }, []);
 
@@ -15,7 +28,7 @@ const Profile = ({ isOwner }) => {
     return <div className='mt-10'>Loading...</div>;
   }
 
-  console.log(user);
+  // console.log(user);
 
   // Mock data for contracts with farmer details
   const contracts = [
@@ -52,14 +65,14 @@ const Profile = ({ isOwner }) => {
           <div className="w-24 h-24 rounded-full bg-white overflow-hidden">
             {/* Placeholder for profile picture */}
             <img
-              src={user.profilePicture ?"" : "https://via.placeholder.com/150"}
+              src={user.profilePicture ?"https://th.bing.com/th/id/OIP.Cl56H6WgxJ8npVqyhefTdQAAAA?rs=1&pid=ImgDetMain" : "https://via.placeholder.com/150"}
               alt="Profile"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="flex-1 text-center md:text-left">
             <h1 className="text-2xl font-bold">{user.fullName}</h1>
-            <p className="text-lg">+91-{user.mobileNumber}</p>
+            <a href={`tel:+91${user.mobileNumber}`} className="text-lg"><i className="fa-solid fa-phone"></i> +91-{user.mobileNumber}</a>
             <p className="text-lg">{user.aadharNumber}</p>
           </div>
           <div className="flex justify-center md:justify-end space-x-2">
