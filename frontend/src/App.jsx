@@ -31,7 +31,6 @@ const App = () => {
               <Route path='/register_farmer' element={<RegisterFarmer />} />
               <Route path='/register_buyer' element={<RegisterBuyer />} />
               <Route path='/verifyotp' element={<OTPVerification />} />
-
             </Routes>
           </>
         )}

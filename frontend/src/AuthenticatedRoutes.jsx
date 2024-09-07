@@ -7,12 +7,11 @@ import Cart from './Pages/Cart';
 import DeliveryTracking from './Pages/DeliveryTracking';
 import Profile from './Pages/Profile';
 import MyContracts from './Pages/MyContracts';
-import MarketPlace from './Pages/MarketPlace';
 import Navbar from './Components/DashBoardComponents/Navbar';
 import SearchPage from './Pages/SearchPage';
+import Marketplace from './Pages/MarketPlace';
 
 const AuthenticatedRoutes = () => {
-
 
   return (
     <>
@@ -25,9 +24,8 @@ const AuthenticatedRoutes = () => {
         <Route path='/deliverytracking' element={<DeliveryTracking />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/mycontracts' element={<MyContracts />} />
-        <Route path='/marketplace' element={<MarketPlace />} />
+        <Route path='/marketplace' element={<Marketplace />} />
         <Route path='/search' element={<SearchPage/>} />
-        
       </Routes>
     </>
   );

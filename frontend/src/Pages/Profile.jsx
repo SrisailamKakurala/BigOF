@@ -1,6 +1,22 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const Profile = ({ isOwner }) => {
+
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const userData = localStorage.getItem("userData");
+    if (userData) {
+      setUser(JSON.parse(userData));
+    }
+  }, []);
+
+  if (!user) {
+    return <div className='mt-10'>Loading...</div>;
+  }
+
+  console.log(user);
+
   // Mock data for contracts with farmer details
   const contracts = [
     {
@@ -27,7 +43,7 @@ const Profile = ({ isOwner }) => {
   ];
 
   const totalCropsPurchased = contracts.length;
-  const totalValue = 350000; // Assuming you calculate the total value from the contracts
+  const totalValue = 350000;
 
   return (
     <div className="min-h-[85vh] bg-white flex flex-col items-center px-4 py-24">
@@ -36,15 +52,15 @@ const Profile = ({ isOwner }) => {
           <div className="w-24 h-24 rounded-full bg-white overflow-hidden">
             {/* Placeholder for profile picture */}
             <img
-              src="https://via.placeholder.com/150"
+              src={user.profilePicture ?"" : "https://via.placeholder.com/150"}
               alt="Profile"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="flex-1 text-center md:text-left">
-            <h1 className="text-2xl font-bold">John Doe</h1>
-            <p className="text-lg">+91-9876543210</p>
-            <p className="text-lg">johndoe@example.com</p>
+            <h1 className="text-2xl font-bold">{user.fullName}</h1>
+            <p className="text-lg">+91-{user.mobileNumber}</p>
+            <p className="text-lg">{user.aadharNumber}</p>
           </div>
           <div className="flex justify-center md:justify-end space-x-2">
             {isOwner && (
@@ -60,7 +76,7 @@ const Profile = ({ isOwner }) => {
 
         <div className="mt-6 bg-green-600 text-white p-4 rounded-lg">
           <p className="font-semibold">Address</p>
-          <p className="mt-2">123, Green Avenue, New Delhi, India</p>
+          <p className="mt-2">{user.address}</p>
         </div>
 
         {/* About Section */}
